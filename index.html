@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#1a2e22">
+<title>Quiz Gratuito | Viva Leve — O que está bloqueando seu emagrecimento?</title>
+<style>
+  :root {
+    --verde: #2d5a3d;
+    --verde2: #4a8c62;
+    --dourado: #c9943a;
+    --dourado2: #e8b84b;
+    --creme: #fdf9f2;
+    --branco: #ffffff;
+    --cinza: #6b7280;
+    --escuro: #1a1a1a;
+    --rosa: #fff5f3;
+    --erro: #dc2626;
+    --font-title: Georgia, 'Times New Roman', serif;
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { font-family:var(--font-body); background:var(--creme); min-height:100vh; overflow-x:hidden; -webkit-text-size-adjust:100%; }
+
+  .hero { background:linear-gradient(155deg,#111f17 0%,#1e3828 55%,#111f17 100%); padding:44px 20px 68px; text-align:center; position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 65% 35%,rgba(201,148,58,.14) 0%,transparent 60%); pointer-events:none; }
+  .hero-pill { display:inline-block; background:rgba(201,148,58,.18); border:1px solid rgba(201,148,58,.45); color:var(--dourado2); font-size:.72rem; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; padding:8px 20px; border-radius:50px; margin-bottom:22px; animation:fadeDown .5s ease both; }
+  .hero h1 { font-family:var(--font-title); font-size:clamp(1.85rem,5.5vw,2.9rem); font-weight:900; color:#fff; line-height:1.18; margin-bottom:14px; animation:fadeDown .5s ease .1s both; }
+  .hero h1 em { color:var(--dourado2); font-style:italic; }
+  .hero-sub { font-size:.97rem; color:rgba(255,255,255,.68); max-width:440px; margin:0 auto 30px; line-height:1.75; font-weight:300; animation:fadeDown .5s ease .2s both; }
+  .hero-pills { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; animation:fadeDown .5s ease .3s both; }
+  .hpill { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14); color:rgba(255,255,255,.75); font-size:.76rem; padding:7px 15px; border-radius:50px; }
+
+  .main { max-width:580px; margin:-26px auto 0; padding:0 14px 56px; position:relative; z-index:10; }
+  .card { background:#fff; border-radius:22px; box-shadow:0 20px 60px rgba(0,0,0,.13),0 4px 16px rgba(0,0,0,.06); overflow:hidden; }
+
+  .prog-wrap { display:none; }
+  .prog-bar { height:5px; background:#eee; }
+  .prog-fill { height:100%; background:linear-gradient(90deg,var(--verde),var(--dourado)); border-radius:5px; transition:width .5s cubic-bezier(.4,0,.2,1); width:0%; }
+  .prog-meta { display:flex; justify-content:space-between; padding:13px 24px 0; }
+  .prog-label { font-size:.76rem; color:var(--cinza); font-weight:500; }
+  .prog-pct { font-size:.76rem; color:var(--verde2); font-weight:700; }
+
+  .intro { padding:34px 24px 30px; }
+  .intro-icon { font-size:2.6rem; margin-bottom:12px; }
+  .intro-title { font-family:var(--font-title); font-size:1.48rem; font-weight:700; color:var(--escuro); line-height:1.35; margin-bottom:10px; }
+  .intro-desc { font-size:.92rem; color:var(--cinza); line-height:1.72; margin-bottom:22px; }
+  .social-proof { display:flex; align-items:flex-start; gap:11px; background:#fffbf0; border:1px solid rgba(201,148,58,.3); border-radius:12px; padding:13px 15px; margin-bottom:20px; }
+  .sp-icon { font-size:1.2rem; flex-shrink:0; margin-top:2px; }
+  .sp-text { font-size:.82rem; color:#7a5c1a; line-height:1.5; }
+  .sp-text strong { display:block; color:#5a3c08; font-size:.86rem; margin-bottom:2px; }
+  .checklist { background:#f2faf5; border-radius:13px; padding:16px 18px; margin-bottom:24px; }
+  .check-item { display:flex; align-items:flex-start; gap:9px; padding:5px 0; font-size:.88rem; color:#333; line-height:1.5; }
+  .check-ico { color:var(--verde2); flex-shrink:0; margin-top:1px; }
+
+  .btn-green { width:100%; padding:18px; background:linear-gradient(135deg,var(--verde),var(--verde2)); color:#fff; border:none; border-radius:13px; font-size:1.02rem; font-weight:700; cursor:pointer; transition:all .28s ease; box-shadow:0 8px 22px rgba(45,90,61,.32); font-family:var(--font-body); -webkit-appearance:none; }
+  .btn-green:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(45,90,61,.42); }
+  .btn-green:active { transform:translateY(0); }
+  .btn-gold { display:block; width:100%; padding:19px; background:linear-gradient(135deg,var(--dourado),var(--dourado2)); color:#1a1a1a; border:none; border-radius:13px; font-size:1.04rem; font-weight:800; cursor:pointer; transition:all .28s ease; box-shadow:0 8px 26px rgba(201,148,58,.42); font-family:var(--font-body); text-decoration:none; text-align:center; -webkit-appearance:none; }
+  .btn-gold:hover { transform:translateY(-3px); box-shadow:0 14px 36px rgba(201,148,58,.52); }
+
+  .q-area { display:none; }
+  .q-header { padding:20px 24px 0; }
+  .q-tag { font-size:.69rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--verde2); margin-bottom:7px; }
+  .q-micro { font-size:.8rem; color:var(--cinza); margin-bottom:8px; font-style:italic; }
+  .q-text { font-family:var(--font-title); font-size:clamp(1.1rem,3.2vw,1.38rem); font-weight:700; color:var(--escuro); line-height:1.42; }
+  .options { padding:18px 24px 6px; display:flex; flex-direction:column; gap:10px; }
+  .opt { display:flex; align-items:flex-start; gap:12px; padding:14px 15px; border:2px solid #e6e6e6; border-radius:12px; cursor:pointer; background:#fff; text-align:left; width:100%; transition:all .2s ease; -webkit-appearance:none; }
+  .opt:hover { border-color:var(--verde2); background:#f0f8f3; transform:translateX(3px); }
+  .opt.sel { border-color:var(--verde); background:linear-gradient(135deg,#edf7f1,#e2f2e8); transform:translateX(4px); }
+  .opt-letter { width:28px; height:28px; border-radius:50%; background:#f0f0f0; display:flex; align-items:center; justify-content:center; font-size:.74rem; font-weight:700; color:var(--cinza); flex-shrink:0; transition:all .2s; }
+  .opt.sel .opt-letter { background:var(--verde); color:#fff; }
+  .opt-text { font-size:.91rem; color:#333; line-height:1.5; padding-top:4px; }
+  .opt.sel .opt-text { font-weight:600; color:var(--escuro); }
+  .btn-next-wrap { padding:8px 24px 24px; }
+  .btn-next { display:none; width:100%; padding:16px; background:linear-gradient(135deg,var(--verde),var(--verde2)); color:#fff; border:none; border-radius:12px; font-size:.96rem; font-weight:700; cursor:pointer; font-family:var(--font-body); transition:all .26s; box-shadow:0 6px 18px rgba(45,90,61,.28); -webkit-appearance:none; }
+  .btn-next:hover { transform:translateY(-2px); }
+  .btn-next.vis { display:block; animation:fadeUp .28s ease both; }
+
+  .lead-area { display:none; padding:32px 24px 30px; }
+  .lead-icon { font-size:2.4rem; margin-bottom:12px; }
+  .lead-title { font-family:var(--font-title); font-size:1.45rem; font-weight:700; color:var(--escuro); line-height:1.32; margin-bottom:9px; }
+  .lead-title em { color:var(--verde2); font-style:italic; }
+  .lead-desc { font-size:.9rem; color:var(--cinza); line-height:1.7; margin-bottom:20px; }
+  .lead-preview { background:linear-gradient(135deg,#eef8f2,#e6f3eb); border:1px solid rgba(74,140,98,.28); border-radius:13px; padding:15px 17px; margin-bottom:22px; }
+  .lp-title { font-size:.72rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--verde); margin-bottom:10px; }
+  .lp-item { display:flex; align-items:center; gap:8px; font-size:.86rem; color:#333; padding:4px 0; }
+  .field-group { margin-bottom:13px; }
+  .field-label { font-size:.8rem; font-weight:600; color:var(--escuro); margin-bottom:6px; display:block; }
+  .field-input { width:100%; padding:14px 15px; border:2px solid #ddd; border-radius:11px; font-size:.95rem; font-family:var(--font-body); color:var(--escuro); background:#fff; transition:border-color .2s; outline:none; -webkit-appearance:none; }
+  .field-input:focus { border-color:var(--verde2); }
+  .field-input.err { border-color:var(--erro); }
+  .field-error { font-size:.76rem; color:var(--erro); margin-top:4px; display:none; }
+  .field-error.show { display:block; }
+  .privacy { font-size:.74rem; color:var(--cinza); text-align:center; margin-top:10px; line-height:1.5; }
+
+  @keyframes fadeDown { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeUp   { from{opacity:0;transform:translateY(14px)}  to{opacity:1;transform:translateY(0)} }
+  .anim-in { animation:fadeUp .3s ease both; }
+  .footer { text-align:center; padding:22px 16px; font-size:.73rem; color:rgba(0,0,0,.28); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-pill">🍋 Quiz gratuito — resultado em 2 minutos</div>
+  <h1>O que está <em>bloqueando</em><br>seu emagrecimento?</h1>
+  <p class="hero-sub">Cada corpo tem um motivo diferente para não emagrecer. Descubra o seu e receba o protocolo certo — gratuitamente.</p>
+  <div class="hero-pills">
+    <span class="hpill">⏱ 2 minutos</span>
+    <span class="hpill">🎁 100% gratuito</span>
+    <span class="hpill">✅ Resultado personalizado</span>
+  </div>
+</div>
+
+<div class="main"><div class="card">
+
+  <div class="prog-wrap" id="progWrap">
+    <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+    <div class="prog-meta">
+      <span class="prog-label" id="progLabel">Pergunta 1 de 7</span>
+      <span class="prog-pct" id="progPct">0%</span>
+    </div>
+  </div>
+
+  <div class="intro" id="introArea">
+    <div class="intro-icon">🌿</div>
+    <div class="intro-title">Qual é o seu perfil de emagrecimento?</div>
+    <div class="intro-desc">Mulheres que não conseguem emagrecer geralmente têm <strong>um motivo específico</strong> — e ele é diferente para cada uma. Este quiz identifica o seu e mostra o caminho mais curto até o resultado.</div>
+    <div class="social-proof">
+      <div class="sp-icon">⭐</div>
+      <div class="sp-text"><strong>Baseado em 3 métodos reais</strong>Desafio 21 Dias • Detox Prestige • Dieta Low Carb — testados na vida real</div>
+    </div>
+    <div class="checklist">
+      <div class="check-item"><span class="check-ico">✅</span>Diagnóstico personalizado do seu perfil</div>
+      <div class="check-item"><span class="check-ico">✅</span>Protocolo indicado para o SEU corpo</div>
+      <div class="check-item"><span class="check-ico">✅</span>Receita detox grátis no resultado</div>
+      <div class="check-item"><span class="check-ico">✅</span>Sem complicação — 7 perguntas rápidas</div>
+    </div>
+    <button class="btn-green" onclick="startQuiz()">Descobrir meu perfil agora 🍋</button>
+  </div>
+
+  <div class="q-area" id="qArea">
+    <div class="q-header">
+      <div class="q-tag" id="qTag"></div>
+      <div class="q-micro" id="qMicro"></div>
+      <div class="q-text" id="qText"></div>
+    </div>
+    <div class="options" id="optArea"></div>
+    <div class="btn-next-wrap">
+      <button class="btn-next" id="btnNext" onclick="nextQ()">Próxima →</button>
+    </div>
+  </div>
+
+  <div class="lead-area" id="leadArea">
+    <div class="lead-icon">🎯</div>
+    <div class="lead-title">Seu diagnóstico está <em>pronto!</em></div>
+    <div class="lead-desc">Identificamos o que está bloqueando seu emagrecimento. Preenche abaixo para receber seu plano personalizado:</div>
+    <div class="lead-preview">
+      <div class="lp-title">✨ Você vai receber</div>
+      <div class="lp-item">🎯 Seu perfil de emagrecimento exclusivo</div>
+      <div class="lp-item">📋 Protocolo personalizado para o seu corpo</div>
+      <div class="lp-item">🍵 Receita detox grátis para começar hoje</div>
+      <div class="lp-item">🔥 O método ideal indicado para você</div>
+    </div>
+    <div class="field-group">
+      <label class="field-label" for="iNome">Seu primeiro nome</label>
+      <input class="field-input" id="iNome" type="text" placeholder="Como posso te chamar?" autocomplete="given-name"/>
+      <div class="field-error" id="eNome">Por favor, informe seu nome</div>
+    </div>
+    <div class="field-group">
+      <label class="field-label" for="iEmail">Seu melhor e-mail</label>
+      <input class="field-input" id="iEmail" type="email" placeholder="seuemail@exemplo.com" autocomplete="email"/>
+      <div class="field-error" id="eEmail">Por favor, informe um e-mail válido</div>
+    </div>
+    <button class="btn-green" onclick="submitLead()">Ver meu resultado gratuito 🎁</button>
+    <p class="privacy">🔒 Seus dados estão seguros. Sem spam — promessa.</p>
+  </div>
+
+</div></div>
+<div class="footer">© Viva Leve | Emagrecimento Real @viva_leve_emagrecendo_real</div>
+
+<script>
+const Qs=[
+  {tag:"Pergunta 1 de 7",micro:"Seja honesta consigo mesma 💛",text:"Quando você se olha no espelho hoje, qual pensamento vem primeiro?",opts:[
+    {l:"A",t:"Minha barriga tá sempre inchada, mesmo comendo pouco",s:"detox"},
+    {l:"B",t:"Já tentei tanta coisa e o peso sempre volta do mesmo jeito",s:"desafio"},
+    {l:"C",t:"Não sei por onde começar — quero entender como funciona de verdade",s:"lowcarb"},
+    {l:"D",t:"Meu corpo parece pesado, sem energia, sem brilho nenhum",s:"detox"}
+  ]},
+  {tag:"Pergunta 2 de 7",micro:"Pense na sua semana típica 🍽️",text:"Como você descreveria sua relação com a alimentação no dia a dia?",opts:[
+    {l:"A",t:"Como normal mas mesmo assim não emagreço — algo está errado por dentro",s:"detox"},
+    {l:"B",t:"Fico bem durante o dia mas à noite bate a compulsão por doce ou pão",s:"desafio"},
+    {l:"C",t:"Não sei o que comer de verdade — tenho muita dúvida sobre alimentação saudável",s:"lowcarb"},
+    {l:"D",t:"Me sinto inchada e retendo líquido independente do que como",s:"detox"}
+  ]},
+  {tag:"Pergunta 3 de 7",micro:"Sem julgamentos aqui 🙏",text:"Quando você pensa em mudar a alimentação, qual é seu maior medo?",opts:[
+    {l:"A",t:"Começar mais uma dieta, sofrer e não ver resultado",s:"desafio"},
+    {l:"B",t:"Ter que deixar de comer o que gosto para sempre",s:"lowcarb"},
+    {l:"C",t:"Não saber o que é saudável de verdade — tem tanta informação errada",s:"lowcarb"},
+    {l:"D",t:"Meu corpo não responder mesmo fazendo tudo certo",s:"detox"}
+  ]},
+  {tag:"Pergunta 4 de 7",micro:"Esse é um dos mais importantes 🎯",text:"Qual desses sintomas você mais se identifica?",opts:[
+    {l:"A",t:"Barriga inchada, retenção de líquido e sensação de peso o dia todo",s:"detox"},
+    {l:"B",t:"Falta de energia, cansaço constante, acordo já cansada",s:"detox"},
+    {l:"C",t:"Dificuldade de criar rotina — começo bem mas abandono em poucos dias",s:"desafio"},
+    {l:"D",t:"Confusão sobre o que comer — carboidrato sim ou não? Como montar o prato?",s:"lowcarb"}
+  ]},
+  {tag:"Pergunta 5 de 7",micro:"Quase lá! 🌿",text:"Como seria o seu jeito ideal de emagrecer?",opts:[
+    {l:"A",t:"Com sucos e receitas naturais que limpam o organismo de dentro pra fora 🍵",s:"detox"},
+    {l:"B",t:"Com um plano de 21 dias estruturado — receitas prontas, cardápios e acompanhamento",s:"desafio"},
+    {l:"C",t:"Aprendendo o que comer de verdade e montando meu cardápio sem sofrimento 🥑",s:"lowcarb"},
+    {l:"D",t:"Com algo rápido e visível na primeira semana para me motivar a continuar",s:"detox"}
+  ]},
+  {tag:"Pergunta 6 de 7",micro:"Seja sincera 💬",text:"O que melhor descreve sua situação com dietas até hoje?",opts:[
+    {l:"A",t:"Nunca tentei nada sério — quero começar do jeito certo desta vez",s:"lowcarb"},
+    {l:"B",t:"Já perdi peso antes mas o efeito sanfona sempre volta",s:"desafio"},
+    {l:"C",t:"Faço de tudo, meu corpo simplesmente não responde — deve ser metabolismo",s:"detox"},
+    {l:"D",t:"Já tentei low carb mas não sabia direito como aplicar no dia a dia",s:"lowcarb"}
+  ]},
+  {tag:"Pergunta 7 de 7",micro:"Última! 🔥",text:"Em quanto tempo você precisa ver resultado para manter a motivação?",opts:[
+    {l:"A",t:"Já — quero sentir meu corpo diferente nos primeiros 3 a 7 dias",s:"detox"},
+    {l:"B",t:"Em até 21 dias — aceito um método guiado se houver resultado real",s:"desafio"},
+    {l:"C",t:"Não tenho pressa — quero aprender e criar hábitos que durem a vida toda",s:"lowcarb"},
+    {l:"D",t:"Em uma semana já me faz bem — desinchar e ganhar energia já é suficiente",s:"detox"}
+  ]}
+];
+
+let cur=0,scores={detox:0,desafio:0,lowcarb:0},selScore=null,userName='';
+
+function startQuiz(){
+  document.getElementById('introArea').style.display='none';
+  document.getElementById('progWrap').style.display='block';
+  document.getElementById('qArea').style.display='block';
+  renderQ();
+}
+
+function renderQ(){
+  const q=Qs[cur];
+  document.getElementById('qTag').textContent=q.tag;
+  document.getElementById('qMicro').textContent=q.micro;
+  document.getElementById('qText').textContent=q.text;
+  const oa=document.getElementById('optArea');
+  oa.innerHTML='';
+  q.opts.forEach(o=>{
+    const b=document.createElement('button');
+    b.className='opt';
+    b.innerHTML=`<div class="opt-letter">${o.l}</div><div class="opt-text">${o.t}</div>`;
+    b.onclick=()=>selOpt(b,o.s);
+    oa.appendChild(b);
+  });
+  selScore=null;
+  const nb=document.getElementById('btnNext');
+  nb.classList.remove('vis');
+  nb.textContent=cur===Qs.length-1?'Ver meu resultado 🎯':'Próxima →';
+  const pct=Math.round((cur/Qs.length)*100);
+  document.getElementById('progFill').style.width=pct+'%';
+  document.getElementById('progLabel').textContent=`Pergunta ${cur+1} de ${Qs.length}`;
+  document.getElementById('progPct').textContent=pct+'%';
+  const qa=document.getElementById('qArea');
+  qa.classList.remove('anim-in');
+  void qa.offsetWidth;
+  qa.classList.add('anim-in');
+}
+
+function selOpt(btn,score){
+  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));
+  btn.classList.add('sel');
+  selScore=score;
+  document.getElementById('btnNext').classList.add('vis');
+}
+
+function nextQ(){
+  if(!selScore)return;
+  scores[selScore]++;
+  if(cur<Qs.length-1){cur++;renderQ();}
+  else showLead();
+}
+
+function showLead(){
+  document.getElementById('qArea').style.display='none';
+  document.getElementById('progWrap').style.display='none';
+  const la=document.getElementById('leadArea');
+  la.style.display='block';
+  la.classList.add('anim-in');
+}
+
+function submitLead(){
+  const nome=document.getElementById('iNome').value.trim();
+  const email=document.getElementById('iEmail').value.trim();
+  let ok=true;
+  if(!nome){document.getElementById('iNome').classList.add('err');document.getElementById('eNome').classList.add('show');ok=false;}
+  else{document.getElementById('iNome').classList.remove('err');document.getElementById('eNome').classList.remove('show');}
+  const er=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(!er.test(email)){document.getElementById('iEmail').classList.add('err');document.getElementById('eEmail').classList.add('show');ok=false;}
+  else{document.getElementById('iEmail').classList.remove('err');document.getElementById('eEmail').classList.remove('show');}
+  if(!ok)return;
+  userName=nome.split(' ')[0];
+  showResult();
+}
+
+function showResult(){
+  document.getElementById('leadArea').style.display='none';
+  // Encontra qual perfil teve a maior pontuação
+  const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+  
+  // Redireciona o usuário para a página HTML correspondente
+  if (winner === 'detox') {
+      window.location.href = '1-detox-prestige-1.html';
+  } else if (winner === 'desafio') {
+      window.location.href = '2-desafio-21-dias-1.html';
+  } else if (winner === 'lowcarb') {
+      window.location.href = '3-low-carb-prestige-1.html';
+  }
+}
+
+</script>
+</body>
+</html>
