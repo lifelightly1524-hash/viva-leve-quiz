@@ -299,10 +299,14 @@ function submitLead(){
   // --- INÍCIO DA ALTERAÇÃO ---
   userName = nome.split(' ')[0];
 
-  // CALCULAMOS O VENCEDOR AQUI PARA ENVIAR PARA A PLANILHA
+ // 1. Define o primeiro nome
+  userName = nome.split(' ')[0];
+
+  // 2. Calcula o vencedor
   const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
 
-  fetch('https://script.google.com/macros/s/AKfycbxGUopnogkdWoXMNQ30hyWh4usLAYNrC2HeF_nyHLIRqfVDlo74dVoy0h-wZOnZTnA0/exec', { // Mantenha sua URL original aqui
+  // 3. Envia para a planilha e depois redireciona
+  fetch('https://script.google.com/macros/s/AKfycbwP_vYp4F_XmNlNLAYNrc2HeF_nyHLIRqfVDlo74dVoy0h-wZOnZTnA0/exec', {
     method: 'POST',
     mode: 'no-cors',
     headers: {
@@ -311,32 +315,28 @@ function submitLead(){
     body: JSON.stringify({
       "nome": nome,
       "email": email,
-      "perfil": winner // Envia o resultado do quiz para o seu funil
+      "perfil": winner
     })
   }).then(() => {
-    showResult(winner); // Passa o vencedor para a próxima função
+    showResult(winner);
   }).catch(() => {
-    showResult(winner); // Garante o redirecionamento mesmo com erro de rede
+    showResult(winner); // Redireciona mesmo se a internet oscilar
   });
-  // --- FIM DA ALTERAÇÃO ---
 }
 
-function showResult(winner){
-  document.getElementById('leadArea').style.display='none';
-  // O REDIRECIONAMENTO LIMPO E RÁPIDO
+// FUNÇÃO DE RESULTADO (Apenas uma vez, sem repetições)
+function showResult(winner) {
+  const leadArea = document.getElementById('leadArea');
+  if (leadArea) leadArea.style.display = 'none';
+
+  // Redirecionamento baseado nos seus arquivos do Netlify
   if (winner === 'detox') {
     window.location.href = '1-detox-prestige-1.html';
   } else if (winner === 'desafio') {
     window.location.href = '2-desafio-21-dias-1.html';
-  } else if (winner === 'lowcarb') {
+  } else if (winner === 'lowcarb' || winner === 'low-carb') {
     window.location.href = '3-low-carb-prestige-1.html';
   } else {
-    // Caso ocorra um erro inesperado, ele volta para a home
     window.location.href = 'index.html';
   }
-  
 }
-
-</script>
-</body>
-</html>
