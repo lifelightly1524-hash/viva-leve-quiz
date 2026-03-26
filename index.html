@@ -319,7 +319,7 @@ function submitLead(){
   const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
 
   // 3. Envia para a planilha e depois redireciona
-  fetch('https://script.google.com/macros/s/AKfycbwP_vYp4F_XmNlNLAYNrc2HeF_nyHLIRqfVDlo74dVoy0h-wZOnZTnA0/exec', {
+  fetch('https://script.google.com/macros/s/AKfycbxGUopnogkdWoXMNQ30hyWh4usLAYNrC2HeF_nyHLIRqfVDlo74dVoy0h-wZOnZTnA0/exec', {
     method: 'POST',
     mode: 'no-cors',
     headers: {
