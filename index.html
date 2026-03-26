@@ -318,23 +318,20 @@ function submitLead(){
   // 2. Calcula o vencedor
   const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
 
-  // 3. Envia para a planilha e depois redireciona
-  fetch('https://script.google.com/macros/s/AKfycbx7fwC6uuAgnxsDT_0OinrNBq7yewyYhO9PiXXEa1O3iB8tnbZKZuts1gN9TidRr7o0/exec', {
+  // 3. Envia para a planilha e redireciona
+  fetch('COLE_AQUI_O_NOVO_LINK_DA_IMPLANTAÇÃO', {
     method: 'POST',
     mode: 'no-cors',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       "nome": nome,
       "email": email,
       "perfil": winner
     })
-  }).then(() => {
-    showResult(winner);
-  }).catch(() => {
-    showResult(winner); // Redireciona mesmo se a internet oscilar
   });
+
+  // Redireciona para o resultado imediatamente para evitar cliques duplos
+  showResult(winner);
 }
 
 // FUNÇÃO DE RESULTADO
