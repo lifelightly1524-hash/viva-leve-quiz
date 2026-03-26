@@ -297,7 +297,21 @@ function submitLead(){
   else{document.getElementById('iEmail').classList.remove('err');document.getElementById('eEmail').classList.remove('show');}
   if(!ok)return;
   userName=nome.split(' ')[0];
+ fetch('https://script.google.com/macros/s/AKfycbw5qtjDJS0gqM8yc4zYCg0PAYYOI62Hww4GrbNbb5UV6HbS8B-Qo8eAuUNk2RptC9bRw/exec', {
+  method: 'POST',
+  mode: 'no-cors',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    "nome": nome,
+    "email": email
+  })
+}).then(() => {
   showResult();
+}).catch(() => {
+  showResult();
+});
 }
 
 function showResult(){
