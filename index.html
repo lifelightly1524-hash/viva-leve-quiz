@@ -156,7 +156,7 @@
   <div class="lead-area" id="leadArea">
     <div class="lead-icon">🎯</div>
     <div class="lead-title">Seu diagnóstico está <em>pronto!</em></div>
-    <div class="lead-desc">Identificamos o que está bloqueando seu emagrecimento. Preenche abaixo para receber seu plano personalizado:</div>
+    <div class="lead-desc">Identificamos o que está bloqueando seu emagrecimento. Preencha abaixo para receber seu plano personalizado:</div>
     <div class="lead-preview">
       <div class="lp-title">✨ Você vai receber</div>
       <div class="lp-item">🎯 Seu perfil de emagrecimento exclusivo</div>
@@ -179,7 +179,7 @@
   </div>
 
 </div></div>
-<div class="footer">© Viva Leve | Emagrecimento Real @viva_leve_emagrecendo_real</div>
+<div class="footer">© Viva Leve | Emagrecimento Real @viva_leve_dry</div>
 
 <script>
 const Qs=[
@@ -290,16 +290,29 @@ function submitLead(){
   const nome=document.getElementById('iNome').value.trim();
   const email=document.getElementById('iEmail').value.trim();
   let ok=true;
-  if(!nome){document.getElementById('iNome').classList.add('err');document.getElementById('eNome').classList.add('show');ok=false;}
-  else{document.getElementById('iNome').classList.remove('err');document.getElementById('eNome').classList.remove('show');}
+  
+  if(!nome){
+    document.getElementById('iNome').classList.add('err');
+    document.getElementById('eNome').classList.add('show');
+    ok=false;
+  } else {
+    document.getElementById('iNome').classList.remove('err');
+    document.getElementById('eNome').classList.remove('show');
+  }
+  
   const er=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if(!er.test(email)){document.getElementById('iEmail').classList.add('err');document.getElementById('eEmail').classList.add('show');ok=false;}
-  else{document.getElementById('iEmail').classList.remove('err');document.getElementById('eEmail').classList.remove('show');}
-  if(!ok)return;
-  // --- INÍCIO DA ALTERAÇÃO ---
-  userName = nome.split(' ')[0];
+  if(!er.test(email)){
+    document.getElementById('iEmail').classList.add('err');
+    document.getElementById('eEmail').classList.add('show');
+    ok=false;
+  } else {
+    document.getElementById('iEmail').classList.remove('err');
+    document.getElementById('eEmail').classList.remove('show');
+  }
+  
+  if(!ok) return;
 
- // 1. Define o primeiro nome
+  // 1. Define o primeiro nome
   userName = nome.split(' ')[0];
 
   // 2. Calcula o vencedor
@@ -324,12 +337,12 @@ function submitLead(){
   });
 }
 
-// FUNÇÃO DE RESULTADO (Apenas uma vez, sem repetições)
+// FUNÇÃO DE RESULTADO
 function showResult(winner) {
   const leadArea = document.getElementById('leadArea');
   if (leadArea) leadArea.style.display = 'none';
 
-  // Redirecionamento baseado nos seus arquivos do Netlify
+  // Redirecionamento baseado nos seus arquivos 
   if (winner === 'detox') {
     window.location.href = '1-detox-prestige-1.html';
   } else if (winner === 'desafio') {
@@ -340,3 +353,6 @@ function showResult(winner) {
     window.location.href = 'index.html';
   }
 }
+</script>
+</body>
+</html>
