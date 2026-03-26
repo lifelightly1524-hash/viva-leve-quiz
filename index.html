@@ -296,32 +296,44 @@ function submitLead(){
   if(!er.test(email)){document.getElementById('iEmail').classList.add('err');document.getElementById('eEmail').classList.add('show');ok=false;}
   else{document.getElementById('iEmail').classList.remove('err');document.getElementById('eEmail').classList.remove('show');}
   if(!ok)return;
-  userName=nome.split(' ')[0];
- fetch('https://script.google.com/macros/s/AKfycby7ohv9ym-pqiCGldkbagipjgMdPoN51KWuyNIy4MSfSk-KEJ4OsHotvZimMJa5U6Oh/exec', {
-  method: 'POST',
-  mode: 'no-cors',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    "nome": nome,
-    "email": email
-  })
-}).then(() => {
-  showResult();
-}).catch(() => {
-  showResult();
-});
+  // --- INÍCIO DA ALTERAÇÃO ---
+  userName = nome.split(' ')[0];
+
+  // CALCULAMOS O VENCEDOR AQUI PARA ENVIAR PARA A PLANILHA
+  const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+
+  fetch('https://script.google.com/macros/s/AKfycbxGUopnogkdWoXMNQ30hyWh4usLAYNrC2HeF_nyHLIRqfVDlo74dVoy0h-wZOnZTnA0/exec', { // Mantenha sua URL original aqui
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "nome": nome,
+      "email": email,
+      "perfil": winner // Envia o resultado do quiz para o seu funil
+    })
+  }).then(() => {
+    showResult(winner); // Passa o vencedor para a próxima função
+  }).catch(() => {
+    showResult(winner); // Garante o redirecionamento mesmo com erro de rede
+  });
+  // --- FIM DA ALTERAÇÃO ---
 }
 
-function showResult(){
+function showResult(winner){
   document.getElementById('leadArea').style.display='none';
-  // Encontra qual perfil teve a maior pontuação
-  const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
-  
-  // Redireciona o usuário para a página HTML correspondente
+  // O REDIRECIONAMENTO LIMPO E RÁPIDO
   if (winner === 'detox') {
-      window.location.href = '1-detox-prestige-1.html';
+    window.location.href = '1-detox-prestige-1.html';
+  } else if (winner === 'desafio') {
+    window.location.href = '2-desafio-21-dias-1.html';
+  } else if (winner === 'lowcarb') {
+    window.location.href = '3-low-carb-prestige-1.html';
+  } else {
+    // Caso ocorra um erro inesperado, ele volta para a home
+    window.location.href = 'index.html';
+  }
   } else if (winner === 'desafio') {
       window.location.href = '2-desafio-21-dias-1.html';
   } else if (winner === 'lowcarb') {
