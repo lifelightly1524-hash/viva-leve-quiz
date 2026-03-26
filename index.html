@@ -319,19 +319,23 @@ function submitLead(){
   const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
 
   // 3. Envia para a planilha e redireciona
-  fetch('https://script.google.com/macros/s/AKfycbzHGW6fXm1M8A_FYjUive9bFRQ2mrfdDpX9ZLNu_czfVSNx8CFaOk32lxD2ynryU1Xye/exec', {
+ // 1. Pente fino: captura os dados direto da caixa de texto
+const campoNome = document.querySelector('input[type="text"]').value || "Cliente";
+const campoEmail = document.querySelector('input[type="email"]').value || "";
+
+// 2. Envia para o Google (Link da Versão 9)
+fetch('https://script.google.com/macros/s/AKfycbzHGW6fXm1M8A_FYjUive9bFRQ2mrfdDpX9ZLNu_czfVSNx8CFaOk32lxD2ynryU1Xye/exec', {
   method: 'POST',
   mode: 'no-cors',
-  headers: {
-    'Content-Type': 'application/json'
-  },
+  headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
-    "nome": nome,
-    "email": email,
+    "nome": campoNome,
+    "email": campoEmail,
     "perfil": winner
   })
 }).then(() => {
-  setTimeout(() => { showResult(winner); }, 800);
+  // 3. Aguarda 1 segundo para o Google gravar na planilha e dispara o resultado
+  setTimeout(() => { showResult(winner); }, 1000);
 }).catch(() => {
   showResult(winner);
 });
