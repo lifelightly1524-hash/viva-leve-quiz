@@ -319,19 +319,22 @@ function submitLead(){
   const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
 
   // 3. Envia para a planilha e redireciona
-  fetch('https://script.google.com/macros/s/AKfycbzHGW6fXm1M8A_FYjUiVe9bFRQ2mrfdDpX9ZLNu_czfVSNx8CFaOK32lxD2ynryU1Xye/exec', {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      "nome": nome,
-      "email": email,
-      "perfil": winner
-    })
-  });
-
-  // Redireciona para o resultado imediatamente
+  fetch('https://script.google.com/macros/s/AKfycbzHGW6fXm1M8A_FYjUive9bFRQ2mrfdDpX9ZLNu_czfVSNx8CFaOk32lxD2ynryU1Xye/exec', {
+  method: 'POST',
+  mode: 'no-cors',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    "nome": nome,
+    "email": email,
+    "perfil": winner
+  })
+}).then(() => {
+  setTimeout(() => { showResult(winner); }, 800);
+}).catch(() => {
   showResult(winner);
+});
 }
 
 // FUNÇÃO DE RESULTADO
