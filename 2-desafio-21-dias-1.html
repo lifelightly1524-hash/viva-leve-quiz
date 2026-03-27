@@ -3,149 +3,180 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Desafio 21 Dias — O Fim do Efeito Sanfona</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Mulher Poderosa — O Desafio de 21 Dias</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--e:#00A878;--el:#00D4A0;--ed:#006B50;--g:#C9A84C;--bg:#040F0D;--bg2:#071510;--bg3:#0A1C18;--w:#FAFFF9;--m:rgba(250,255,249,0.55);--b:rgba(0,168,120,0.2);}
+:root{--p:#E8166B;--pl:#FF4D9B;--pd:#A00048;--pu:#FF8DC7;--bg:#0D0008;--bg2:#160010;--bg3:#1E0018;--w:#FFF0F7;--m:rgba(255,240,247,0.6);--b:rgba(232,22,107,0.2);}
 *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--w);overflow-x:hidden;}
-.topbar{background:linear-gradient(90deg,var(--ed),var(--e),var(--ed));background-size:200%;animation:gf 4s linear infinite;text-align:center;padding:10px 20px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;}
-@keyframes gf{0%{background-position:0%}100%{background-position:200%}}
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 80px;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(0,168,120,0.18),transparent 70%),var(--bg);position:relative;overflow:hidden;}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(0,168,120,0.4);border-radius:50px;padding:8px 22px;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--el);margin-bottom:32px;background:rgba(0,168,120,0.06);}
-.eyebrow::before{content:'●';font-size:7px;animation:bl 1.5s ease-in-out infinite;}
-@keyframes bl{0%,100%{opacity:1;}50%{opacity:0.2;}}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,7vw,84px);font-weight:700;line-height:1.08;margin-bottom:28px;letter-spacing:-1px;}
-.hero h1 em{font-style:italic;background:linear-gradient(135deg,var(--el),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero-sub{font-size:clamp(16px,2.5vw,21px);color:var(--m);max-width:620px;margin:0 auto 48px;line-height:1.8;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--w);overflow-x:hidden;}
+.topbar{background:linear-gradient(90deg,var(--pd),var(--p),var(--pl),var(--p),var(--pd));background-size:300%;animation:gf 5s linear infinite;text-align:center;padding:10px 20px;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;}
+@keyframes gf{0%{background-position:0%}100%{background-position:300%}}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 80px;background:radial-gradient(ellipse 90% 60% at 50% 0%,rgba(232,22,107,0.22),transparent 70%),radial-gradient(ellipse 50% 40% at 10% 80%,rgba(232,22,107,0.08),transparent 60%),var(--bg);position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--p),transparent);}
+.crown{font-size:48px;display:block;margin-bottom:20px;animation:float 3s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.hero-tag{display:inline-block;background:linear-gradient(135deg,var(--p),var(--pd));color:var(--w);font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;padding:8px 24px;border-radius:50px;margin-bottom:24px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(40px,7vw,86px);font-weight:900;line-height:1.05;margin-bottom:28px;letter-spacing:-1px;}
+.hero h1 span{color:var(--pl);}
+.hero h1 em{font-style:italic;font-weight:400;}
+.hero-sub{font-size:clamp(16px,2.5vw,20px);color:var(--m);max-width:640px;margin:0 auto 48px;line-height:1.8;}
 .hero-sub strong{color:var(--w);}
 .stats{display:flex;gap:48px;justify-content:center;margin-bottom:52px;flex-wrap:wrap;}
-.stat-n{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:700;background:linear-gradient(135deg,var(--el),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;display:block;margin-bottom:4px;}
-.stat-l{font-size:11px;color:var(--m);text-transform:uppercase;letter-spacing:2px;}
-.btn{display:inline-block;background:linear-gradient(135deg,var(--e),var(--ed));color:var(--w);font-family:'DM Sans',sans-serif;font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:2px;padding:20px 52px;border-radius:3px;text-decoration:none;border:none;cursor:pointer;position:relative;overflow:hidden;transition:all .3s;box-shadow:0 0 40px rgba(0,168,120,.35);}
-.btn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transition:.5s;}
+.stat-item{display:flex;flex-direction:column;align-items:center;transition:transform .3s;}
+.stat-item:hover{transform:translateY(-5px);}
+.stat-circle{width:110px;height:110px;border-radius:50%;background:rgba(232,22,107,.05);border:2px solid var(--b);display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(232,22,107,.15);position:relative;margin-bottom:12px;}
+.stat-circle::after{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(232,22,107,.1),transparent 70%);}
+.stat-n{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:var(--pl);line-height:1;}
+.stat-n sup{font-size:20px;}
+.stat-l{font-size:11px;color:var(--m);text-transform:uppercase;letter-spacing:2px;font-weight:600;}
+.btn{display:inline-block;background:linear-gradient(135deg,var(--p),var(--pd));color:var(--w);font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;padding:20px 52px;border-radius:50px;text-decoration:none;border:none;cursor:pointer;position:relative;overflow:hidden;transition:all .3s;box-shadow:0 8px 40px rgba(232,22,107,.4);animation:bp 2.5s ease-in-out infinite;}
+@keyframes bp{0%,100%{box-shadow:0 8px 40px rgba(232,22,107,.4);}50%{box-shadow:0 8px 60px rgba(232,22,107,.7);}}
+.btn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transition:.5s;}
 .btn:hover::after{left:100%;}
-.btn:hover{transform:translateY(-2px);box-shadow:0 0 60px rgba(0,168,120,.5);}
+.btn:hover{transform:translateY(-3px) scale(1.02);}
 .btn-note{display:block;margin-top:12px;font-size:12px;color:rgba(255,255,255,.35);}
-.cdb{background:var(--bg2);border-top:1px solid var(--b);border-bottom:1px solid var(--b);padding:22px 20px;text-align:center;}
-.cdi{display:inline-flex;align-items:center;gap:28px;flex-wrap:wrap;justify-content:center;}
+.price-hero{display:inline-flex;align-items:baseline;gap:8px;margin-bottom:32px;}
+.price-old-h{font-size:16px;color:rgba(255,255,255,.3);text-decoration:line-through;}
+.price-new-h{font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:var(--pl);line-height:1;}
+.price-inst{font-size:13px;color:rgba(255,255,255,.4);display:block;margin-top:4px;}
+.cdb{background:var(--bg2);border-top:1px solid var(--b);border-bottom:1px solid var(--b);padding:20px 20px;text-align:center;}
+.cdi{display:inline-flex;align-items:center;gap:24px;flex-wrap:wrap;justify-content:center;}
 .cd-lbl{font-size:11px;color:var(--m);text-transform:uppercase;letter-spacing:2px;}
-.cd-row{display:flex;gap:10px;align-items:center;}
-.cd-u{text-align:center;}
-.cdn{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;color:var(--el);background:rgba(0,168,120,.1);border:1px solid var(--b);padding:6px 14px;border-radius:3px;display:block;min-width:60px;line-height:1;}
+.cd-row{display:flex;gap:8px;align-items:center;}
+.cdn{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--pl);background:rgba(232,22,107,.1);border:1px solid var(--b);padding:6px 12px;border-radius:8px;display:block;min-width:58px;line-height:1;text-align:center;}
 .cdl{font-size:9px;color:var(--m);text-transform:uppercase;letter-spacing:1px;margin-top:4px;display:block;}
-.cds{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--e);line-height:1;}
+.cds{font-family:'Playfair Display',serif;font-size:28px;color:var(--p);line-height:1;}
 section{padding:88px 24px;}
 .cont{max-width:1080px;margin:0 auto;}
-.sl{font-size:11px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--e);display:block;margin-bottom:12px;}
-.st{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4.5vw,54px);font-weight:700;line-height:1.15;margin-bottom:20px;}
-.st em{font-style:italic;color:var(--el);}
-.prob{background:var(--bg2);}
-.pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--b);margin-top:48px;}
-.pi{background:var(--bg2);padding:36px 28px;transition:background .3s;}
-.pi:hover{background:rgba(0,168,120,.06);}
-.pi-ic{font-size:28px;margin-bottom:14px;display:block;}
-.pi h3{font-size:16px;font-weight:600;margin-bottom:8px;}
-.pi p{font-size:14px;color:var(--m);line-height:1.7;}
-.sci{background:var(--bg3);text-align:center;}
-.sq{max-width:700px;margin:0 auto 52px;font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,32px);font-style:italic;line-height:1.55;color:rgba(255,255,255,.85);}
-.sq strong{color:var(--el);font-style:normal;}
-.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
-.ph{background:rgba(0,168,120,.05);border:1px solid var(--b);border-radius:2px;padding:32px 24px;text-align:left;position:relative;overflow:hidden;transition:all .3s;}
-.ph:hover{background:rgba(0,168,120,.1);border-color:var(--e);}
-.ph-n{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:700;color:rgba(0,168,120,.12);position:absolute;top:-8px;right:16px;line-height:1;}
-.ph-ic{font-size:32px;margin-bottom:14px;display:block;position:relative;z-index:1;}
-.ph h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--el);margin-bottom:8px;position:relative;z-index:1;}
-.ph p{font-size:14px;color:var(--m);line-height:1.7;position:relative;z-index:1;}
-.trans{background:var(--bg);}
-.tg{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
-@media(max-width:768px){.tg{grid-template-columns:1fr;}}
-.tv{background:linear-gradient(135deg,var(--bg3),rgba(0,168,120,.08));border:1px solid var(--b);border-radius:2px;padding:40px 32px;}
-.dr{display:flex;align-items:center;gap:18px;padding:18px 0;border-bottom:1px solid rgba(0,168,120,.1);}
-.dr:last-child{border-bottom:none;}
-.db{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--e);background:rgba(0,168,120,.1);border:1px solid var(--b);border-radius:2px;padding:6px 10px;white-space:nowrap;min-width:72px;text-align:center;}
-.dt h4{font-size:15px;font-weight:600;margin-bottom:3px;}
-.dt p{font-size:13px;color:var(--m);line-height:1.5;}
-.tl{display:flex;flex-direction:column;gap:18px;}
-.ti{display:flex;gap:14px;align-items:flex-start;}
-.tc{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--e),var(--ed));display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:2px;}
-.ti h4{font-size:15px;font-weight:600;margin-bottom:3px;}
-.ti p{font-size:14px;color:var(--m);line-height:1.6;}
-.tests{background:var(--bg2);text-align:center;}
+.sl{font-size:11px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--p);display:block;margin-bottom:12px;}
+.st{font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,54px);font-weight:700;line-height:1.15;margin-bottom:20px;}
+.st em{font-style:italic;color:var(--pl);}
+.mirror{background:var(--bg2);}
+.mc{max-width:780px;margin:0 auto;text-align:center;}
+.mirror-text{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,38px);font-weight:700;line-height:1.4;margin-bottom:32px;}
+.mirror-text em{font-style:italic;color:var(--pl);}
+.mirror-desc{font-size:17px;color:var(--m);line-height:1.8;margin-bottom:48px;}
+.mirror-desc strong{color:var(--w);}
+.pain-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;text-align:left;}
+.pain-card{background:rgba(232,22,107,.06);border:1px solid var(--b);border-radius:16px;padding:28px 24px;position:relative;overflow:hidden;transition:all .3s;}
+.pain-card:hover{background:rgba(232,22,107,#111);border-color:var(--p);transform:translateY(-4px);}
+.pain-card::before{content:attr(data-n);position:absolute;top:-10px;right:16px;font-family:'Playfair Display',serif;font-size:80px;font-weight:700;color:rgba(232,22,107,.08);line-height:1;}
+.pain-icon{font-size:30px;margin-bottom:12px;display:block;color:var(--pu);text-shadow:0 0 10px rgba(232,22,107,.5);}
+.pain-card h3{font-size:16px;font-weight:700;color:var(--w);margin-bottom:8px;}
+.pain-card p{font-size:14px;color:var(--m);line-height:1.7;}
+.solution{background:var(--bg3);text-align:center;}
+.sol-quote{font-family:'Playfair Display',serif;font-size:clamp(20px,3.5vw,36px);font-style:italic;color:rgba(255,255,255,.9);max-width:700px;margin:0 auto 56px;line-height:1.5;}
+.sol-quote strong{font-style:normal;color:var(--pl);}
+.sol-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;}
+.sol-card{background:rgba(232,22,107,.06);border:1px solid var(--b);border-radius:16px;padding:32px 24px;text-align:left;transition:all .3s;}
+.sol-card:hover{background:rgba(232,22,107,.1);border-color:var(--p);}
+.sol-icon{font-size:36px;margin-bottom:16px;display:block;color:var(--pu);text-shadow:0 0 10px rgba(232,22,107,.5);}
+.sol-card h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--pl);margin-bottom:8px;}
+.sol-card p{font-size:14px;color:var(--m);line-height:1.7;}
+.results{background:var(--bg);}
+.rg{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+@media(max-width:768px){.rg{grid-template-columns:1fr;}}
+.timeline-v{display:flex;flex-direction:column;gap:0;position:relative;}
+.timeline-v::before{content:'';position:absolute;left:20px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--p),transparent);}
+.tv-item{display:flex;gap:20px;padding:24px 0;position:relative;}
+.tv-dot{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--pd));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0;position:relative;z-index:1;}
+.tv-content h4{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--pl);margin-bottom:4px;}
+.tv-content p{font-size:14px;color:var(--m);line-height:1.6;}
+.tv-day{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:4px;display:block;}
+.benefits-v{display:flex;flex-direction:column;gap:20px;margin-top:8px;}
+.bv{background:rgba(232,22,107,.06);border:1px solid var(--b);border-radius:12px;padding:22px 20px;display:flex;gap:14px;align-items:flex-start;transition:all .3s;}
+.bv:hover{background:rgba(232,22,107,.1);}
+.bv-icon{font-size:24px;flex-shrink:0;color:var(--pu);text-shadow:0 0 10px rgba(232,22,107,.5);}
+.bv h4{font-size:15px;font-weight:700;color:var(--w);margin-bottom:4px;}
+.bv p{font-size:13px;color:var(--m);line-height:1.6;}
+.recipes{background:var(--bg2);}
+.rec-intro{font-size:17px;color:var(--m);max-width:640px;margin:0 auto 48px;line-height:1.8;text-align:center;}
+.rec-intro strong{color:var(--w);}
+.rec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+.rec-card{background:var(--bg3);border:1px solid var(--b);border-radius:16px;padding:28px 24px;position:relative;transition:all .3s;}
+.rec-card:hover{border-color:var(--p);transform:translateY(-4px);}
+.rec-tag{position:absolute;top:16px;right:16px;background:rgba(232,22,107,.15);border:1px solid var(--b);border-radius:20px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--p);padding:4px 10px;}
+.rec-icon{font-size:32px;margin-bottom:14px;display:block;color:var(--pu);text-shadow:0 0 10px rgba(232,22,107,.5);}
+.rec-card h3{font-size:16px;font-weight:700;color:var(--w);margin-bottom:6px;}
+.rec-card p{font-size:13px;color:var(--m);line-height:1.6;}
+.tests{background:var(--bg3);text-align:center;}
 .tsg{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px;margin-top:48px;}
-.tc2{background:var(--bg3);border:1px solid var(--b);border-radius:2px;padding:32px 26px;text-align:left;transition:all .3s;}
-.tc2:hover{border-color:var(--e);transform:translateY(-4px);}
-.ts{color:var(--g);font-size:15px;margin-bottom:14px;display:block;letter-spacing:2px;}
-.tt{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:18px;}
+.tc{background:var(--bg2);border:1px solid var(--b);border-radius:16px;padding:32px 26px;text-align:left;transition:all .3s;}
+.tc:hover{border-color:var(--p);transform:translateY(-4px);}
+.ts{color:#FFD700;font-size:15px;margin-bottom:14px;display:block;letter-spacing:2px;text-shadow:0 0 10px rgba(255,215,0,.4);}
+.tt{font-family:'Playfair Display',serif;font-size:17px;font-style:italic;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:18px;}
 .ta{display:flex;align-items:center;gap:12px;}
-.av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--e),var(--g));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0;}
-.an{font-weight:600;font-size:14px;}
+.av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--pd));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;}
+.an{font-weight:700;font-size:14px;}
 .ad{font-size:12px;color:var(--m);margin-top:2px;}
-.inc{background:var(--bg3);}
+.inc{background:var(--bg);}
 .ig{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:48px;}
-.ii{background:rgba(0,168,120,.04);border:1px solid var(--b);border-radius:2px;padding:26px 22px;display:flex;gap:14px;align-items:flex-start;transition:all .3s;}
-.ii:hover{background:rgba(0,168,120,.08);border-color:var(--e);}
-.ii-ic{font-size:26px;flex-shrink:0;}
-.ii h4{font-size:15px;font-weight:600;margin-bottom:3px;}
+.ii{background:rgba(232,22,107,.05);border:1px solid var(--b);border-radius:12px;padding:26px 22px;display:flex;gap:14px;align-items:flex-start;transition:all .3s;}
+.ii:hover{background:rgba(232,22,107,.1);border-color:var(--p);}
+.ii-ic{font-size:28px;flex-shrink:0;color:var(--pu);text-shadow:0 0 10px rgba(232,22,107,.5);}
+.ii h4{font-size:15px;font-weight:700;color:var(--w);margin-bottom:4px;}
 .ii p{font-size:13px;color:var(--m);line-height:1.6;}
-.pricing{background:radial-gradient(ellipse 80% 60% at 50% 100%,rgba(0,168,120,.12),transparent 70%),var(--bg);text-align:center;}
-.pb{max-width:520px;margin:48px auto 0;background:var(--bg2);border:1px solid var(--e);border-radius:2px;padding:52px 40px;position:relative;}
-.pbadge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--e),var(--g));font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 22px;border-radius:2px;white-space:nowrap;color:var(--bg);}
+.pricing{background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(232,22,107,.12),transparent 70%),var(--bg2);text-align:center;}
+.pb{max-width:540px;margin:48px auto 0;background:var(--bg3);border:2px solid var(--p);border-radius:24px;padding:52px 40px;position:relative;}
+.pb::before{content:'';position:absolute;inset:-20px;border-radius:30px;border:2px solid rgba(232,22,107,.2);pointer-events:none;animation:pulseB 2s infinite;}
+@keyframes pulseB { 0%,100%{opacity:.5;} 50%{opacity:1;} }
+.pbadge{position:absolute;top:-18px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--p),var(--pd));font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:6px 24px;border-radius:50px;white-space:nowrap;color:var(--w);}
 .po{font-size:15px;color:rgba(255,255,255,.3);text-decoration:line-through;margin-bottom:4px;}
-.pm{font-family:'Cormorant Garamond',serif;font-size:88px;font-weight:700;color:var(--el);line-height:1;}
+.pm{font-family:'Playfair Display',serif;font-size:88px;font-weight:700;color:var(--pl);line-height:1;}
 .pm sup{font-size:36px;vertical-align:top;margin-top:16px;display:inline-block;}
 .pp{font-size:13px;color:var(--m);margin:8px 0 32px;}
-.pl{text-align:left;margin-bottom:36px;display:flex;flex-direction:column;gap:12px;list-style:none;}
-.pl li{display:flex;align-items:center;gap:10px;font-size:15px;color:rgba(255,255,255,.8);}
-.plc{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--e),var(--ed));display:inline-flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;}
-.tr{display:flex;justify-content:center;gap:20px;margin-top:18px;flex-wrap:wrap;}
+.pl2{text-align:left;margin-bottom:36px;display:flex;flex-direction:column;gap:12px;list-style:none;}
+.pl2 li{display:flex;align-items:center;gap:10px;font-size:15px;color:rgba(255,255,255,.85);}
+.plc{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--pd));display:inline-flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;}
+.tr{display:flex;justify(center;gap:20px;margin-top:18px;flex-wrap:wrap;}
 .tri{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--m);}
-.gua{background:var(--bg2);}
-.gb{max-width:680px;margin:0 auto;display:flex;gap:28px;align-items:center;background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.25);border-radius:2px;padding:44px 36px;}
+.gua{background:var(--bg);}
+.gb{max-width:700px;margin:0 auto;display:flex;gap:28px;align-items:center;background:linear-gradient(135deg,rgba(232,22,107,.08),rgba(232,22,107,.03));border:1px solid rgba(232,22,107,.3);border-radius:20px;padding:44px 36px;}
 @media(max-width:600px){.gb{flex-direction:column;text-align:center;padding:28px 20px;}}
 .gi{font-size:64px;flex-shrink:0;}
-.gt h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:#E8C96B;margin-bottom:10px;}
+.gt h3{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--pl);margin-bottom:10px;}
 .gt p{font-size:15px;color:var(--m);line-height:1.8;}
-.faq{background:var(--bg3);}
-.fl{max-width:720px;margin:48px auto 0;display:flex;flex-direction:column;gap:1px;background:var(--b);}
-.fi{background:var(--bg3);}
-.fq{padding:20px 26px;font-weight:600;font-size:15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background .2s;user-select:none;}
-.fq:hover{background:rgba(0,168,120,.06);}
-.fq.open{color:var(--el);}
-.fa2{width:22px;height:22px;border:1px solid var(--b);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;transition:transform .3s;}
-.fq.open .fa2{transform:rotate(180deg);border-color:var(--e);}
-.fa{max-height:0;overflow:hidden;transition:max-height .35s,padding .35s;padding:0 26px;font-size:14px;color:var(--m);line-height:1.75;}
-.fa.open{max-height:200px;padding:0 26px 18px;}
-.final{background:linear-gradient(135deg,var(--bg),var(--bg3));text-align:center;padding:112px 24px;border-top:1px solid var(--b);}
-.final h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,5vw,60px);font-weight:700;line-height:1.2;margin-bottom:20px;}
-.final h2 em{font-style:italic;background:linear-gradient(135deg,var(--el),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.faq{background:var(--bg2);}
+.fl{max-width:720px;margin:48px auto 0;display:flex;flex-direction:column;gap:12px;}
+.fi{background:var(--bg3);border:1px solid var(--b);border-radius:12px;overflow:hidden;}
+.fq{padding:20px 24px;font-weight:700;font-size:15px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background .2s;user-select:none;}
+.fq:hover{background:rgba(232,22,107,.06);}
+.fq.open{color:var(--pl);}
+.fa2{width:24px;height:24px;border:1px solid var(--b);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;transition:transform .3s;}
+.fq.open .fa2{transform:rotate(180deg);border-color:var(--p);}
+.fa{max-height:0;overflow:hidden;transition:max-height .35s,padding .35s;padding:0 24px;font-size:14px;color:var(--m);line-height:1.75;}
+.fa.open{max-height:200px;padding:0 24px 18px;}
+.final{background:linear-gradient(135deg,var(--bg),var(--bg2));text-align:center;padding:112px 24px;border-top:1px solid var(--b);}
+.final h2{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,62px);font-weight:700;line-height:1.2;margin-bottom:20px;}
+.final h2 em{font-style:italic;color:var(--pl);}
 .final p{font-size:17px;color:var(--m);max-width:520px;margin:0 auto 48px;line-height:1.8;}
-.stick{position:fixed;bottom:0;left:0;right:0;background:rgba(4,15,13,.97);backdrop-filter:blur(16px);border-top:1px solid var(--b);padding:14px 24px;display:flex;align-items:center;justify-content:center;gap:28px;z-index:1000;transform:translateY(100%);transition:transform .4s;flex-wrap:wrap;}
+.stick{position:fixed;bottom:0;left:0;right:0;background:rgba(13,0,8,.97);backdrop-filter:blur(16px);border-top:1px solid var(--b);padding:14px 24px;display:flex;align-items:center;justify-content:center;gap:28px;z-index:1000;transform:translateY(100%);transition:transform .4s;flex-wrap:wrap;}
 .stick.show{transform:translateY(0);}
-.sp{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--el);}
-.sp small{font-size:12px;color:rgba(255,255,255,.3);text-decoration:line-through;display:block;font-family:'DM Sans',sans-serif;font-weight:400;}
-.bs{background:linear-gradient(135deg,var(--e),var(--ed));color:var(--w);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:13px 30px;border-radius:2px;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:all .3s;}
+.sp{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--pl);}
+.sp small{font-size:12px;color:rgba(255,255,255,.3);text-decoration:line-through;display:block;font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;}
+.bs{background:linear-gradient(135deg,var(--p),var(--pd));color:var(--w);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;padding:13px 30px;border-radius:50px;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:all .3s;box-shadow:0 4px 20px rgba(232,22,107,.4);}
 footer{background:var(--bg);padding:32px 24px;text-align:center;border-top:1px solid rgba(255,255,255,.04);}
 footer p{font-size:12px;color:rgba(255,255,255,.25);line-height:1.8;}
-footer a{color:var(--e);text-decoration:none;}
+footer a{color:var(--p);text-decoration:none;}
 .rev{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s;}
 .rev.in{opacity:1;transform:none;}
-@media(max-width:768px){.tg{grid-template-columns:1fr;}.pb{padding:40px 20px;}}
+@media(max-width:480px){.pb{padding:40px 20px;}.pm{font-size:64px;}}
 </style>
 </head>
 <body>
-<div class="topbar">🌿 Vagas Limitadas · Desafio Aberto · Acesso Imediato</div>
+<div class="topbar">👑 Vagas Abertas · Valor Promocional · Acesso Imediato</div>
 
 <section class="hero">
-  <div class="eyebrow">Protocolo de Choque Metabólico</div>
-  <h1>Você já tentou de tudo.<br>Agora é hora de tentar <em>o que funciona.</em></h1>
-  <p class="hero-sub">O <strong>Desafio 21 Dias</strong> não é uma dieta para você desistir na primeira semana. É um método de reprogramação corporal guiado, passo a passo, para você sair do ciclo de engorda-emagrece e resgatar o controle do seu corpo de forma definitiva.</p>
+  <span class="crown">👑</span>
+  <span class="hero-tag">Protocolo de Choque Metabólico</span>
+  <h1>Cansada de falhar?<br>Chegou a hora de destravar<br><span><em>sua mente e seu corpo.</em></span></h1>
+  <p class="hero-sub">O <strong>Desafio 21 Dias</strong> não é uma dieta para você desistir na primeira semana. É um método guiado, passo a passo, para você quebrar o ciclo de engorda-emagrece e recuperar sua feminilidade de forma definitiva.</p>
   <div class="stats">
-    <div class="stat"><span class="stat-n">21</span><span class="stat-l">Dias de Foco Total</span></div>
-    <div class="stat"><span class="stat-n">100%</span><span class="stat-l">Guiado e Prático</span></div>
-    <div class="stat"><span class="stat-n">0</span><span class="stat-l">Dietas Malucas</span></div>
+    <div class="stat-item"><div class="stat-circle"><span class="stat-n">21</span></div><span class="stat-l">Dias de Foco</span></div>
+    <div class="stat-item"><div class="stat-circle"><span class="stat-n">100<sup>%</sup></span></div><span class="stat-l">Guiado</span></div>
+    <div class="stat-item"><div class="stat-circle"><span class="stat-n">0</span></div><span class="stat-l">Dietas Malucas</span></div>
   </div>
-  <a href="#" class="btn">🌿 QUERO ACEITAR O DESAFIO AGORA</a>
+  <a href="https://pay.herospark.com/mulher-poderosa-o-desafio-de-21-dias-504784" class="btn">👑 QUERO VOLTAR A ME SENTIR PODEROSA</a>
   <span class="btn-note">🔒 Pagamento seguro · Acesso liberado na hora · Garantia incondicional</span>
 </section>
 
@@ -159,58 +190,76 @@ footer a{color:var(--e);text-decoration:none;}
       <span class="cds">:</span>
       <div class="cd-u"><span class="cdn" id="ds">33</span><span class="cdl">seg</span></div>
     </div>
-    <span style="font-size:15px;color:rgba(255,255,255,.55);">Por apenas <strong style="color:#00D4A0;font-size:22px;">R$37,90</strong></span>
+    <span style="font-size:14px;color:rgba(255,255,255,.55);">De R$63,99 por <strong style="color:#FF4D9B;font-size:20px;">R$31,99</strong></span>
   </div>
 </div>
 
-<section class="prob">
+<section class="mirror">
   <div class="cont">
-    <div style="text-align:center;">
-      <span class="sl" style="display:block;">A VERDADE DÓI, MAS LIBERTA</span>
-      <h2 class="st" style="text-align:center;">O "Efeito Sanfona" não destruiu só o seu corpo.<br>Destruiu sua <em>autoconfiança</em>.</h2>
-      <p style="font-size:17px;color:var(--m);max-width:640px;margin:0 auto 52px;line-height:1.8;">Sabe aquela voz na sua cabeça dizendo "Você vai falhar de novo"? Essa voz existe porque você passou anos lutando contra o seu corpo, usando métodos radicais que só geram mais fome e mais frustração.</p>
-    </div>
-    <div class="pg rev">
-      <div class="pi"><span class="pi-ic">😭</span><h3>O Medo de Falhar (De Novo)</h3><p>Começar na segunda-feira cheia de motivação e, na quinta-feira, já ter chutado o balde e se sentindo a pior pessoa do mundo.</p></div>
-      <div class="pi"><span class="pi-ic">👗</span><h3>A Gaveta do "Quando eu Emagrecer"</h3><p>Aquelas roupas lindas no fundo do armário que você guarda como um troféu triste de um corpo que você tinha, mas que parece impossível de recuperar.</p></div>
-      <div class="pi"><span class="pi-ic">🪞</span><h3>A Vergonha Silenciosa</h3><p>Fugir de eventos, inventar desculpas para não ir à praia e apagar a luz na intimidade porque a sua própria imagem te machuca.</p></div>
-      <div class="pi"><span class="pi-ic">🍔</span><h3>A Ansiedade que Devora</h3><p>O ciclo vicioso: você fica triste com o espelho, ataca a comida para buscar conforto, sente culpa logo depois e fica ainda mais triste. E o peso só sobe.</p></div>
+    <div class="mc">
+      <span class="sl" style="display:block;">O VERDADEIRO INIMIGO SILENCIOSO</span>
+      <h2 class="mirror-text">O "Efeito Sanfona" não destruiu só o seu corpo.<br>Destruiu sua<br><em>autoconfiança.</em></h2>
+      <p class="mirror-desc">Sabe aquela voz na sua cabeça dizendo "Você vai falhar de novo"? Essa voz existe porque você passou anos lutando contra o seu corpo, usando métodos radicais que só geram mais fome e mais frustração.</p>
+      <div class="pain-list rev">
+        <div class="pain-card" data-n="01"><span class="pain-icon">😭</span><h3>O Medo de Falhar (De Novo)</h3><p>Começar na segunda-feira cheia de motivação e, na quinta-feira, já ter chutado o balde e se sentindo a pior pessoa do mundo.</p></div>
+        <div class="pain-card" data-n="02"><span class="pain-icon">👗</span><h3>A Gaveta Triste</h3><p>Aquelas roupas lindas no fundo do armário que você guarda como um troféu triste de um corpo que você tinha, mas que parece impossível de recuperar.</p></div>
+        <div class="pain-card" data-n="03"><span class="pain-icon">🪞</span><h3>A Vergonha Silenciosa</h3><p>Fugir de eventos, inventar desculpas para não ir à praia e apagar a luz na intimidade porque a sua própria imagem te machuca.</p></div>
+        <div class="pain-card" data-n="04"><span class="pain-icon">🍔</span><h3>A Ansiedade que Devora</h3><p>O ciclo vicioso: você fica triste com o espelho, ataca a comida para buscar conforto, sente culpa logo depois e o peso só sobe.</p></div>
+        <div class="pain-card" data-n="05"><span class="pain-icon">😴</span><h3>O Cansaço Constante</h3><p>Acordar já exausta. Sentir que sua energia vital foi sugada pelo próprio inchaço. Você está apenas sobrevivendo aos dias, não vivendo de verdade.</p></div>
+        <div class="pain-card" data-n="06"><span class="pain-icon">💔</span><h3>Autoestima no Chão</h3><p>Você parou de se sentir bonita. De se sentir desejável. E a culpa que vem junto com tudo isso é a pior parte de todas.</p></div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="sci">
+<section class="solution">
   <div class="cont">
-    <span class="sl" style="display:block;">A SUA ÚLTIMA TENTATIVA</span>
-    <p class="sq">"O cérebro humano precisa de exatos 21 dias para quebrar um hábito ruim e criar um novo caminho neural. Nós vamos usar a ciência para <strong>hackear o seu comportamento e o seu metabolismo ao mesmo tempo.</strong>"</p>
-    <div class="phases rev">
-      <div class="ph"><span class="ph-n">1</span><span class="ph-ic">🛑</span><h3>O Freio de Choque (Dias 1 a 7)</h3><p>A fase mais importante. Cortamos a dependência química do seu cérebro por açúcar e farinha. Você vai sentir o corpo desinchar absurdamente na primeira semana.</p></div>
-      <div class="ph"><span class="ph-n">2</span><span class="ph-ic">🔥</span><h3>A Fornalha Ativa (Dias 8 a 14)</h3><p>Com o corpo limpo, seu metabolismo acorda. É aqui que você começa a notar as roupas ficando realmente largas. A queima acontece de forma constante.</p></div>
-      <div class="ph"><span class="ph-n">3</span><span class="ph-ic">🧠</span><h3>O Novo Padrão (Dias 15 a 21)</h3><p>O esforço desaparece. Comer de forma leve passa a ser natural e prazeroso. Você olha para o doce e ele simplesmente não te domina mais.</p></div>
+    <span class="sl" style="display:block;">A VIRADA DE CHAVE</span>
+    <p class="sol-quote">"O cérebro humano precisa de exatos 21 dias para quebrar um hábito ruim. Nós vamos usar a ciência para <strong>hackear o seu comportamento e o seu metabolismo ao mesmo tempo.</strong>"</p>
+    <div class="sol-cards rev">
+      <div class="sol-card"><span class="sol-icon">🛑</span><h3>O Freio de Choque (Dias 1 a 7)</h3><p>A fase mais importante. Cortamos a dependência química do seu cérebro por açúcar. Você vai sentir o corpo desinchar absurdamente na primeira semana.</p></div>
+      <div class="sol-card"><span class="sol-icon">🔥</span><h3>A Fornalha Ativa (Dias 8 a 14)</h3><p>Com o corpo limpo, seu metabolismo acorda. É aqui que você começa a notar as roupas ficando realmente largas. A queima acontece de forma constante.</p></div>
+      <div class="sol-card"><span class="sol-icon">🧠</span><h3>O Novo Padrão (Dias 15 a 21)</h3><p>O esforço desaparece. Comer de forma leve passa a ser natural e prazeroso. Você olha para o doce e ele simplesmente não te domina mais.</p></div>
+      <div class="sol-card"><span class="sol-icon">⏱️</span><h3>100% Prático e Rápido</h3><p>Receitas e estratégias focadas na mulher moderna que não tem tempo a perder. Tudo pronto em até 20 minutos.</p></div>
     </div>
   </div>
 </section>
 
-<section class="trans">
+<section class="results">
   <div class="cont">
-    <div class="tg">
+    <div class="rg">
       <div class="rev">
-        <span class="sl">COMO VAI SER A SUA VIDA</span>
-        <h2 class="st">Imagina acordar no<br><em>Dia 22...</em></h2>
-        <div class="tv">
-          <div class="dr"><span class="db">A Sensação</span><div class="dt"><h4>Leveza Imbatível</h4><p>Sem estômago alto, sem inchaço. Você levanta da cama e sente o abdômen reto, uma sensação que você não experimentava há anos.</p></div></div>
-          <div class="dr"><span class="db">O Controle</span><div class="dt"><h4>Você no Comando</h4><p>Passar por uma padaria e não sentir desespero. Olhar um cardápio e saber escolher sem sofrimento. A comida perdeu o poder sobre você.</p></div></div>
-          <div class="dr"><span class="db">A Recompensa</span><div class="dt"><h4>O Prazer de se Vestir</h4><p>Pegar aquela calça jeans da "gaveta triste", vestir e o botão fechar com folga. O sorriso no espelho volta a ser sincero.</p></div></div>
+        <span class="sl">Semana a semana</span>
+        <h2 class="st">Sua transformação<br><em>dia após dia</em></h2>
+        <div class="timeline-v">
+          <div class="tv-item"><div class="tv-dot">7</div><div class="tv-content"><span class="tv-day">Dias 1 a 7</span><h4>O Choque Inicial</h4><p>O intestino volta a funcionar. A sensação sufocante de barriga estufada cede visivelmente logo nos primeiros dias do protocolo.</p></div></div>
+          <div class="tv-item"><div class="tv-dot">14</div><div class="tv-content"><span class="tv-day">Dias 8 a 14</span><h4>Leveza Absoluta</h4><p>O corpo expulsa o líquido preso. Você sente suas pernas mais leves e as roupas que marcavam a cintura começam a folgar.</p></div></div>
+          <div class="tv-item"><div class="tv-dot">21</div><div class="tv-content"><span class="tv-day">Dias 15 a 21</span><h4>A Vitória no Espelho</h4><p>Aquele short antigo fecha sem ter que prender a respiração. Você volta a sentir orgulho de si mesma e provou que é capaz.</p></div></div>
         </div>
       </div>
       <div class="rev">
-        <span class="sl">POR QUE AGORA VAI DAR CERTO?</span>
-        <div class="tl" style="margin-top:32px;">
-          <div class="ti"><span class="tc">✓</span><div><h4>Porque tem um Fim</h4><p>Saber que são "apenas 21 dias" blinda o seu cérebro contra a desistência. É um esforço com linha de chegada clara.</p></div></div>
-          <div class="ti"><span class="tc">✓</span><div><h4>Porque é Passo a Passo</h4><p>Você não vai precisar pensar no que comer. O cardápio e a lista estão prontos. É só seguir as instruções.</p></div></div>
-          <div class="ti"><span class="tc">✓</span><div><h4>Porque Corta o Mal pela Raiz</h4><p>Não tratamos só os sintomas, atacamos a fome emocional. É uma limpeza física e mental profunda.</p></div></div>
+        <span class="sl" style="margin-top:8px;display:block;">O que você vai conquistar</span>
+        <div class="benefits-v" style="margin-top:32px;">
+          <div class="bv"><span class="bv-icon">👗</span><div><h4>Vestir o que você ama</h4><p>Chega de roupas largas e pretas para disfarçar. A moda volta a ser sua aliada.</p></div></div>
+          <div class="bv"><span class="bv-icon">🌟</span><div><h4>Paz com o espelho</h4><p>A maior vitória não é o peso na balança, é recuperar o amor-próprio e o brilho nos olhos.</p></div></div>
+          <div class="bv"><span class="bv-icon">💪</span><div><h4>Barriga visivelmente menor</h4><p>Sem dietas restritivas, você vai ver o volume do estômago alto murchando rapidamente.</p></div></div>
+          <div class="bv"><span class="bv-icon">🧠</span><div><h4>Fim da fome emocional</h4><p>As formulações estabilizam a ansiedade, acabando com os assaltos à geladeira de madrugada.</p></div></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="recipes">
+  <div class="cont">
+    <span class="sl" style="display:block;text-align:center;">O QUE VOCÊ VAI COMER</span>
+    <h2 class="st" style="text-align:center;">Receitas práticas que<br><em>viciam o corpo na queima</em></h2>
+    <p class="rec-intro">Tudo selecionado para a mulher moderna que não tem tempo a perder. <strong>Todas as receitas ficam prontas em até 20 minutos</strong> e cabem no seu bolso.</p>
+    <div class="rec-grid rev">
+      <div class="rec-card"><span class="rec-tag">Café Matinal</span><span class="rec-icon">🥞</span><h3>Crepioca "Feminilidade Ativa"</h3><p>Ovo + tapioca + queijo light. Sabor incrível, pronto em 5 min. Você não vai sentir que está fazendo dieta.</p></div>
+      <div class="rec-card"><span class="rec-tag">Almoço Real</span><span class="rec-icon">🍗</span><h3>Strogonoff de Grão-de-Bico</h3><p>Clássico reinventado com proteína vegetal. Saciedade por 4 horas. Custo: menos de R$8 por porção.</p></div>
+      <div class="rec-card"><span class="rec-tag">Jantar Leve</span><span class="rec-icon">🥘</span><h3>Escondidinho Diurético</h3><p>Abóbora cabotiá + carne magra. Zero inchaço, máxima saciedade. Prático para as noites corridas.</p></div>
+      <div class="rec-card"><span class="rec-tag">TPM Free</span><span class="rec-icon">🍫</span><h3>Mousse de Cacau do Poder</h3><p>Chocolate cacau 100% — só 140 calorias, zero culpa. Aumenta serotonina e dopamina nos dias difíceis.</p></div>
     </div>
   </div>
 </section>
@@ -218,10 +267,10 @@ footer a{color:var(--e);text-decoration:none;}
 <section class="tests">
   <div class="cont">
     <span class="sl" style="display:block;">ELAS VENCERAM O DESAFIO</span>
-    <h2 class="st" style="text-align:center;">Mulheres reais, <em>vitórias reais.</em></h2>
+    <h2 class="st" style="text-align:center;">Histórias reais de<br><em>mulheres poderosas</em></h2>
     <div class="tsg rev">
-      <div class="tc2"><span class="ts">★★★★★</span><p class="tt">"Eu tentei de tudo, até remédio. Nada funcionava porque minha cabeça estava doente de ansiedade. O Desafio foi a primeira vez que consegui terminar algo. No dia 21, eu era outra mulher, por dentro e por fora."</p><div class="ta"><div class="av">A</div><div><p class="an">Amanda J.</p><p class="ad">Venceu o efeito sanfona após 5 anos</p></div></div></div>
-      <div class="tc2"><span class="ts">★★★★★</span><p class="tt">"A primeira semana foi intensa, o inchaço foi todo embora. Na segunda, a calça que eu não usava há 3 anos entrou. Eu chorei no provador da minha própria casa."</p><div class="ta"><div class="av" style="background:linear-gradient(135deg,#006B50,#C9A84C);">C</div><div><p class="an">Carolina M.</p><p class="ad">Eliminou medidas significativas e recuperou o guarda-roupa</p></div></div></div>
+      <div class="tc"><span class="ts">★★★★★</span><p class="tt">"Eu tentei de tudo, até remédio. Nada funcionava porque minha cabeça estava doente de ansiedade. O Desafio foi a primeira vez que consegui terminar algo. No dia 21, eu era outra mulher, por dentro e por fora."</p><div class="ta"><div class="av">A</div><div><p class="an">Amanda J.</p><p class="ad">Venceu o efeito sanfona após 5 anos</p></div></div></div>
+      <div class="tc"><span class="ts">★★★★★</span><p class="tt">"A primeira semana foi intensa, o inchaço foi todo embora. Na segunda, a calça que eu não usava há 3 anos entrou. Eu chorei no provador da minha própria casa. Gasto menos no supermercado e como muito melhor."</p><div class="ta"><div class="av" style="background:linear-gradient(135deg,#006B50,#C9A84C);">C</div><div><p class="an">Carolina M.</p><p class="ad">Eliminou medidas e recuperou o guarda-roupa</p></div></div></div>
     </div>
   </div>
 </section>
@@ -229,12 +278,12 @@ footer a{color:var(--e);text-decoration:none;}
 <section class="inc">
   <div class="cont">
     <span class="sl" style="text-align:center;display:block;">O SEU ARSENAL COMPLETO</span>
-    <h2 class="st" style="text-align:center;">Tudo o que você precisa<br>para <em>não falhar.</em></h2>
+    <h2 class="st" style="text-align:center;">Tudo o que é liberado<br>para você <em>agora</em></h2>
     <div class="ig rev">
-      <div class="ii"><span class="ii-ic">📱</span><div><h4>Manual do Desafio 21 Dias</h4><p>Seu acesso premium imediato. Todo o método detalhado para você ler e aplicar pelo seu próprio celular.</p></div></div>
-      <div class="ii"><span class="ii-ic">🍽️</span><div><h4>Cardápios de Ação</h4><p>Sugestões práticas do que comer nas 3 fases do Desafio. Simples, rápido e com comida de verdade.</p></div></div>
-      <div class="ii"><span class="ii-ic">🛒</span><div><h4>Lista de Mercado Otimizada</h4><p>Pare de gastar dinheiro com coisas inúteis. Uma lista exata do que você precisa para os 21 dias.</p></div></div>
-      <div class="ii"><span class="ii-ic">🛡️</span><div><h4>Garantia Total</h4><p>Seja por qual motivo for, se você não amar o resultado, tem o seu dinheiro 100% devolvido em até 7 dias.</p></div></div>
+      <div class="ii"><span class="ii-ic">📱</span><div><h4>Manual do Desafio 21 Dias</h4><p>Seu acesso premium imediato. Todo o método detalhado em formato digital para você ler no seu celular.</p></div></div>
+      <div class="ii"><span class="ii-ic">🍽️</span><div><h4>Cardápio de Ação Prática</h4><p>Sugestões do que comer nas 3 fases do Desafio. Simples, rápido e com comida de verdade.</p></div></div>
+      <div class="ii"><span class="ii-ic">🛒</span><div><h4>Guia de Compras Econômico</h4><p>Pare de gastar dinheiro com coisas inúteis. Uma lista exata do que você precisa para economizar no mercado.</p></div></div>
+      <div class="ii"><span class="ii-ic">🛡️</span><div><h4>Garantia Total</h4><p>Sua satisfação está 100% garantida ou seu dinheiro é devolvido. Risco absolutamente zero.</p></div></div>
     </div>
   </div>
 </section>
@@ -244,18 +293,19 @@ footer a{color:var(--e);text-decoration:none;}
     <span class="sl" style="display:block;text-align:center;">SUA MELHOR DECISÃO</span>
     <h2 class="st" style="text-align:center;">Quanto vale voltar a ter<br>orgulho de <em>você mesma?</em></h2>
     <div class="pb rev">
-      <span class="pbadge">🌿 TURMA ABERTA COM DESCONTO</span>
-      <p class="po">Valor Original: R$97,00</p>
-      <p class="pm"><sup>R$</sup>37<span style="font-size:40px;font-family:'Cormorant Garamond',serif;">,90</span></p>
-      <p class="pp">Taxa única. Sem mensalidades. Acesso imediato.</p>
-      <ul class="pl">
-        <li><span class="plc">✓</span>Acesso integral ao Desafio 21 Dias</li>
-        <li><span class="plc">✓</span>Módulo Especial: O Freio de Choque</li>
-        <li><span class="plc">✓</span>Cardápios Práticos (Café, Almoço e Jantar)</li>
-        <li><span class="plc">✓</span>Acesso por Celular, Tablet ou Computador</li>
-        <li><span class="plc">✓</span>Selo Incondicional de Garantia</li>
+      <span class="pbadge">👑 TURMA ABERTA COM DESCONTO</span>
+      <p class="po">Valor Original: R$63,99</p>
+      <p class="pm"><sup>R$</sup>31<span style="font-size:40px;font-family:'Playfair Display',serif;">,99</span></p>
+      <p class="pp">ou 12x de R$3,30 · taxa única · acesso imediato</p>
+      <ul class="pl2">
+        <li><span class="plc">✓</span>Acesso imediato ao Protocolo Desafio 21 Dias</li>
+        <li><span class="plc">✓</span>Guia com as Receitas de Ação Prática</li>
+        <li><span class="plc">✓</span>Guia de Compras Inteligente e Econômico</li>
+        <li><span class="plc">✓</span>Módulo Especial: O Relógio do Metabolismo</li>
+        <li><span class="plc">✓</span>Acesso Vitalício (Repita quando quiser)</li>
+        <li><span class="plc">✓</span>Selo Incondicional de Garantia de 7 Dias</li>
       </ul>
-      <a href="#" class="btn" style="width:100%;text-align:center;font-size:17px;padding:22px 40px;display:block;">🌿 EU ACEITO O DESAFIO 21 DIAS</a>
+      <a href="https://pay.herospark.com/mulher-poderosa-o-desafio-de-21-dias-504784" class="btn">👑 EU ACEITO O DESAFIO 21 DIAS</a>
       <p style="margin-top:14px;font-size:12px;color:rgba(255,255,255,.3);">🔒 Ambiente 100% Seguro · Compra Criptografada</p>
       <div class="tr"><span class="tri">🛡️ Pagamento Seguro</span><span class="tri">⚡ Acesso Liberado na Hora</span></div>
     </div>
@@ -266,41 +316,42 @@ footer a{color:var(--e);text-decoration:none;}
   <div class="cont">
     <div class="gb rev">
       <span class="gi">🛡️</span>
-      <div class="gt"><h3>Garantia Incondicional de 7 Dias</h3><p>Eu tiro todo o peso dos seus ombros e coloco nos meus. Entre no Desafio agora, aplique a Fase 1 (O Freio de Choque). Se em 7 dias você não sentir seu corpo desinchando absurdamente e a sua vontade de doce diminuindo... basta um clique e devolvemos seus R$37,90. Você não tem nada a perder.</p></div>
+      <div class="gt"><h3>Garantia Blindada de 7 Dias</h3><p>Eu confio tanto no resultado que o risco é todo meu. Se você aplicar o Método por 7 dias e não notar sua barriga desinchando, as roupas mais frouxas e a vergonha sumindo... É só me mandar uma única mensagem e eu devolvo centavo por centavo dos seus R$31,99. Você não tem absolutamente nada a perder, apenas a inflamação para eliminar.</p></div>
     </div>
   </div>
 </section>
 
 <section class="faq">
   <div class="cont">
-    <span class="sl" style="display:block;text-align:center;">SEM DESCULPAS</span>
+    <span class="sl" style="display:block;text-align:center;">NÃO DEIXE A DÚVIDA TE PARAR</span>
     <h2 class="st" style="text-align:center;">Ainda não tem <em>certeza?</em></h2>
     <div class="fl">
-      <div class="fi"><div class="fq" onclick="tf(this)">Vou ter que comer comidas caras e difíceis de achar?<span class="fa2">▼</span></div><div class="fa">De jeito nenhum. O Desafio é baseado em "comida de verdade" (ovos, carnes, legumes, frutas). Tudo o que você já encontra em qualquer mercado de esquina. Nada de produtos empacotados caros.</div></div>
-      <div class="fi"><div class="fq" onclick="tf(this)">Eu já tentei de tudo e falhei. Por que isso vai dar certo?<span class="fa2">▼</span></div><div class="fa">Porque não é uma dieta solta. É um protocolo de 21 dias com começo, meio e fim, focado em quebrar o seu vício em açúcar e controlar a fome emocional. Quando a mente muda, o corpo acompanha.</div></div>
-      <div class="fi"><div class="fq" onclick="tf(this)">Como vou receber o meu acesso?<span class="fa2">▼</span></div><div class="fa">Assim que o pagamento for aprovado (Pix e Cartão liberam na hora), você receberá um e-mail com seu acesso exclusivo a todo o material em formato digital de alta definição.</div></div>
+      <div class="fi"><div class="fq" onclick="tf(this)">Vou ter que comer comidas caras?<span class="fa2">▼</span></div><div class="fa">De jeito nenhum. O Desafio é baseado em "comida de verdade" (ovos, carnes, legumes, frutas). Tudo o que você já encontra em qualquer mercado de esquina.</div></div>
+      <div class="fi"><div class="fq" onclick="tf(this)">Eu já tentei de tudo. Por que isso vai dar certo?<span class="fa2">▼</span></div><div class="fa">Porque não é uma dieta solta. É um protocolo de 21 dias focado em quebrar o seu vício em açúcar e controlar a fome emocional. Quando a mente muda, o corpo acompanha.</div></div>
+      <div class="fi"><div class="fq" onclick="tf(this)">Vou ter que passar fome?<span class="fa2">▼</span></div><div class="fa">Jamais. Passar fome só trava o metabolismo. O objetivo não é te privar, mas sim "limpar" o lixo tóxico que te impede de desinchar. Você continua comendo de forma inteligente.</div></div>
+      <div class="fi"><div class="fq" onclick="tf(this)">Como vou receber o meu acesso?<span class="fa2">▼</span></div><div class="fa">Assim que o pagamento for aprovado (Pix e Cartão liberam na hora), você receberá um e-mail com seu acesso exclusivo a todo o material em formato digital, pronto para ler no seu próprio celular.</div></div>
     </div>
   </div>
 </section>
 
 <section class="final">
   <div class="cont">
-    <h2>Você está a um passo de deixar para trás<br>a versão que você <em>não quer mais ser.</em></h2>
-    <p>Pare de adiar a sua felicidade para a "próxima segunda-feira". Aceite o Desafio hoje e comece a resgatar a sua melhor versão.</p>
-    <a href="#" class="btn" style="font-size:18px;padding:22px 56px;">🌿 SIM, EU ACEITO O DESAFIO</a>
+    <h2>Você tem duas opções hoje. Apenas <em>uma te liberta.</em></h2>
+    <p>Você pode fechar essa página e continuar com vergonha de colocar a roupa que ama, ou pode tomar as rédeas da sua vida agora. Resgate a mulher maravilhosa que você abandonou pelo caminho.</p>
+    <a href="https://pay.herospark.com/mulher-poderosa-o-desafio-de-21-dias-504784" class="btn">👑 SIM, EU QUERO RECUPERAR MINHA AUTOESTIMA</a>
     <span class="btn-note">🔒 Acesso Imediato · Compra 100% Segura</span>
   </div>
 </section>
 
-<footer><p>© 2026 Desafio 21 Dias · Viva Leve<br><a href="#">Política de Privacidade</a> · <a href="#">Termos de Uso</a><br><br>Aviso legal: O conteúdo deste material é puramente informativo. Antes de começar qualquer programa alimentar, consulte um profissional de saúde. Os resultados dependem da dedicação individual.</p></footer>
+<footer><p>© 2026 Mulher Poderosa · Viva Leve<br><a href="#">Política de Privacidade</a> · <a href="#">Termos de Uso</a> · <a href="#">Suporte</a><br><br>Aviso legal: O conteúdo deste material é puramente informativo e educacional. Não deve ser interpretado como aconselhamento médico. Antes de começar qualquer programa alimentar, consulte um profissional de saúde.</p></footer>
 
 <div class="stick" id="stick">
-  <div class="sp"><small>De R$97,00</small>R$37,90</div>
-  <a href="#" class="bs">🌿 ACEITAR O DESAFIO</a>
+  <div class="sp"><small>De R$63,99</small>R$31,99</div>
+  <a href="https://pay.herospark.com/mulher-poderosa-o-desafio-de-21-dias-504784" class="bs">👑 ACEITAR O DESAFIO</a>
 </div>
 
 <script>
-(function(){const k='dp_end';let e=localStorage.getItem(k);if(!e){e=Date.now()+(8*3600000+47*60000+33000);localStorage.setItem(k,e);}e=parseInt(e);function t(){const r=e-Date.now();if(r<=0){['dh','dm','ds'].forEach(i=>document.getElementById(i).textContent='00');return;}const h=Math.floor(r/3600000),m=Math.floor((r%3600000)/60000),s=Math.floor((r%60000)/1000);document.getElementById('dh').textContent=String(h).padStart(2,'0');document.getElementById('dm').textContent=String(m).padStart(2,'0');document.getElementById('ds').textContent=String(s).padStart(2,'0');}setInterval(t,1000);t();})();
+(function(){const k='d21_end';let e=localStorage.getItem(k);if(!e){e=Date.now()+(08*3600000+47*60000+33000);localStorage.setItem(k,e);}e=parseInt(e);function t(){const r=e-Date.now();if(r<=0){['dh','dm','ds'].forEach(i=>document.getElementById(i).textContent='00');return;}const h=Math.floor(r/3600000),m=Math.floor((r%3600000)/60000),s=Math.floor((r%60000)/1000);document.getElementById('dh').textContent=String(h).padStart(2,'0');document.getElementById('dm').textContent=String(m).padStart(2,'0');document.getElementById('ds').textContent=String(s).padStart(2,'0');}setInterval(t,1000);t();})();
 window.addEventListener('scroll',()=>document.getElementById('stick').classList.toggle('show',scrollY>500));
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.1});
 document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
