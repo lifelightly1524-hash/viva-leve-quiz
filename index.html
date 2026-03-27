@@ -1,28 +1,73 @@
-function submitLead(){
-  const n=document.getElementById('iNome').value.trim();
-  const e=document.getElementById('iEmail').value.trim();
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Quiz Viva Leve</title>
+<style>
+  :root { --verde: #2d5a3d; --creme: #fdf9f2; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: sans-serif; background:var(--creme); text-align:center; }
+  .hero { background:#111f17; padding:40px 20px; color:#fff; }
+  .main { max-width:500px; margin:-20px auto 0; padding:20px; }
+  .card { background:#fff; border-radius:20px; padding:30px; box-shadow:0 10px 30px rgba(0,0,0,0.1); }
+  .btn { width:100%; padding:15px; background:var(--verde); color:#fff; border:none; border-radius:10px; font-weight:700; cursor:pointer; margin-top:20px; }
+  .opt { width:100%; padding:15px; border:1px solid #ddd; border-radius:10px; margin-bottom:10px; background:#fff; cursor:pointer; text-align:left; }
+  .field-input { width:100%; padding:15px; border:1px solid #ddd; border-radius:10px; margin-bottom:10px; }
+</style>
+</head>
+<body>
+<div class="hero"><h1>O que <em>bloqueia</em> seu emagrecimento?</h1></div>
+<div class="main"><div class="card">
+  <div id="intro">
+    <p style="margin-bottom:20px;">Descubra seu perfil e receba o guia ideal para o seu corpo.</p>
+    <button class="btn" onclick="start()">Começar Análise 🍋</button>
+  </div>
+  <div id="questions" style="display:none;">
+    <h3 id="qText" style="margin-bottom:20px;"></h3>
+    <div id="opts"></div>
+  </div>
+  <div id="lead" style="display:none;">
+    <h3>Análise Concluída!</h3>
+    <p style="margin-bottom:20px;">Para onde enviamos seu acesso?</p>
+    <input class="field-input" id="iNome" type="text" placeholder="Seu nome">
+    <input class="field-input" id="iEmail" type="email" placeholder="Seu e-mail">
+    <button class="btn" id="btnSubmit" onclick="submit()">Ver Meu Resultado ➜</button>
+  </div>
+</div></div>
+<script>
+const Qs=[
+  {t:"Sentimento ao se vestir?",o:[{t:"Tristeza/Esconder",s:"detox"},{t:"Frustração/Nada fecha",s:"desafio"},{t:"Vergonha/Desisto",s:"lowcarb"}]},
+  {t:"O que mais machuca?",o:[{t:"Volume na barriga",s:"detox"},{t:"Fugir de fotos",s:"desafio"},{t:"Me abandonei",s:"lowcarb"}]},
+  {t:"Desejo urgente?",o:[{t:"Barriga reta",s:"detox"},{t:"Jeans favorito",s:"desafio"},{t:"Ter orgulho",s:"lowcarb"}]}
+];
+let cur=0, scores={detox:0,desafio:0,lowcarb:0};
+function start(){ document.getElementById('intro').style.display='none'; document.getElementById('questions').style.display='block'; render(); }
+function render(){
+  const q=Qs[cur]; document.getElementById('qText').innerText=q.t;
+  const area=document.getElementById('opts'); area.innerHTML='';
+  q.o.forEach(o=>{
+    const b=document.createElement('button'); b.className='opt'; b.innerText=o.t;
+    b.onclick=()=>{ scores[o.s]++; if(cur<Qs.length-1){ cur++; render(); } else { document.getElementById('questions').style.display='none'; document.getElementById('lead').style.display='block'; } };
+    area.appendChild(b);
+  });
+}
+function submit(){
+  const n=document.getElementById('iNome').value, e=document.getElementById('iEmail').value;
+  if(!n || !e.includes('@')) return alert('Preencha corretamente');
+  document.getElementById('btnSubmit').disabled=true;
+  const w=Object.keys(scores).reduce((a,b)=>scores[a]>scores[b]?a:b);
+  const d = w === 'detox' ? '1-detox-prestige-1.html' : w === 'desafio' ? '2-desafio-21-dias-1.html' : '3-low-carb-prestige-1.html';
   
-  if(!n || !e.includes('@')) return;
-
-  const btn = document.getElementById('btnSubmit');
-  btn.disabled = true; 
-  btn.innerHTML = 'Analisando... ⏳';
-
-  const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
-  
-  // Rota das páginas no seu repositório do GitHub
-  const destino = winner === 'detox' ? '1-detox-prestige-1.html' : winner === 'desafio' ? '2-desafio-21-dias-1.html' : '3-low-carb-prestige-1.html';
-
-  // URL do seu Google Script (mantenha a mesma que você já tem)
   fetch('https://script.google.com/macros/s/AKfycbxu_QRXF5U1nBNapxsfivxJMTbutawrtj1Gd8iiSET-hbNBKS_YhZyAQ0dchoT-tZ0I/exec', {
     method: 'POST',
     mode: 'no-cors',
     headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify({ nome: n, email: e, perfil: winner })
+    body: JSON.stringify({ nome: n, email: e, perfil: w })
   });
 
-  // Aguarda 800ms para garantir o envio antes de mudar de página
-  setTimeout(() => {
-    window.location.href = destino;
-  }, 800);
+  setTimeout(() => { window.location.href = d; }, 800);
 }
+</script>
+</body>
+</html>
