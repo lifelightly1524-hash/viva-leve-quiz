@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="theme-color" content="#1a2e22">
-<title>Quiz Viva Leve — Protocolo Personalizado</title>
+<title>Quiz Viva Leve — Protocolo de Emagrecimento</title>
 <style>
   :root {
     --verde: #2d5a3d; --verde2: #4a8c62; --dourado: #c9943a; --dourado2: #e8b84b;
@@ -14,33 +13,25 @@
   }
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body { font-family:var(--font-body); background:var(--creme); min-height:100vh; overflow-x:hidden; }
-
-  .hero { background:linear-gradient(155deg,#111f17 0%,#1e3828 55%,#111f17 100%); padding:44px 20px 68px; text-align:center; position:relative; }
-  .hero h1 { font-family:var(--font-title); font-size:clamp(1.85rem,5.5vw,2.9rem); color:#fff; line-height:1.18; margin-bottom:14px; }
+  .hero { background:linear-gradient(155deg,#111f17 0%,#1e3828 55%,#111f17 100%); padding:44px 20px 68px; text-align:center; }
+  .hero h1 { font-family:var(--font-title); font-size:clamp(1.85rem,5.5vw,2.9rem); color:#fff; line-height:1.18; }
   .hero h1 em { color:var(--dourado2); font-style:italic; }
-
   .main { max-width:580px; margin:-26px auto 0; padding:0 14px 56px; position:relative; z-index:10; }
   .card { background:#fff; border-radius:22px; box-shadow:0 20px 60px rgba(0,0,0,.13); overflow:hidden; }
-
   .prog-wrap { display:none; }
   .prog-bar { height:5px; background:#eee; }
   .prog-fill { height:100%; background:linear-gradient(90deg,var(--verde),var(--dourado)); width:0%; transition:width .5s; }
-
   .intro { padding:34px 24px 30px; text-align: center; }
-  .btn-green { width:100%; padding:18px; background:linear-gradient(135deg,var(--verde),var(--verde2)); color:#fff; border:none; border-radius:13px; font-size:1.02rem; font-weight:700; cursor:pointer; transition: 0.3s; }
+  .btn-green { width:100%; padding:18px; background:linear-gradient(135deg,var(--verde),var(--verde2)); color:#fff; border:none; border-radius:13px; font-size:1.02rem; font-weight:700; cursor:pointer; }
   .btn-green:disabled { background: #ccc; cursor: not-allowed; opacity: 0.7; }
-
   .q-area { display:none; padding:25px 24px; }
-  .q-text { font-family:var(--font-title); font-size:1.3rem; font-weight:700; color:var(--escuro); margin-bottom:20px; line-height: 1.4; }
-  .opt { display:flex; align-items:center; gap:12px; padding:15px; border:2px solid #e6e6e6; border-radius:12px; margin-bottom:10px; cursor:pointer; background:#fff; width:100%; text-align:left; font-size: 0.95rem; line-height: 1.4; font-family: var(--font-body); }
-  .opt:hover { border-color: var(--verde); background: #f9f9f9; }
-
+  .q-text { font-family:var(--font-title); font-size:1.3rem; font-weight:700; color:var(--escuro); margin-bottom:20px; }
+  .opt { display:flex; align-items:center; gap:12px; padding:15px; border:2px solid #e6e6e6; border-radius:12px; margin-bottom:10px; cursor:pointer; background:#fff; width:100%; text-align:left; font-size: 0.95rem; }
   .lead-area { display:none; padding:32px 24px; }
   .field-input { width:100%; padding:14px; border:2px solid #ddd; border-radius:11px; margin-bottom:5px; outline:none; font-size: 1rem; }
-  .field-input:focus { border-color: var(--verde); }
   .field-error { font-size:.76rem; color:var(--erro); display:none; margin-bottom:12px; }
   .field-error.show { display:block; }
-  .footer { text-align:center; padding:40px 20px; font-size:0.75rem; color:#888; line-height: 1.6; }
+  .footer { text-align:center; padding:40px 20px; font-size:0.75rem; color:#888; }
 </style>
 </head>
 <body>
@@ -54,7 +45,7 @@
 
   <div class="intro" id="introArea">
     <div style="font-size: 1.1rem; margin-bottom: 25px; color: #555; line-height: 1.6;">
-      Responda 7 perguntas rápidas para descobrir seu perfil metabólico e receber o protocolo ideal.
+      Descubra seu perfil metabólico e receba o protocolo ideal para o seu corpo.
     </div>
     <button class="btn-green" onclick="startQuiz()">Descobrir meu perfil agora 🍋</button>
   </div>
@@ -65,35 +56,27 @@
   </div>
 
   <div class="lead-area" id="leadArea">
-    <h2 style="margin-bottom: 15px; font-family: var(--font-title); color: var(--escuro);">Análise Concluída!</h2>
-    <p style="margin-bottom: 20px; color: #666;">Para onde enviamos seu perfil personalizado e o guia de acesso?</p>
-    
+    <h2 style="margin-bottom: 15px; font-family: var(--font-title);">Análise Concluída!</h2>
+    <p style="margin-bottom: 20px; color: #666;">Para onde enviamos seu perfil e o guia de acesso?</p>
     <input class="field-input" id="iNome" type="text" placeholder="Seu nome">
-    <div class="field-error" id="eNome">Por favor, informe seu nome</div>
-    
+    <div class="field-error" id="eNome">Informe seu nome</div>
     <input class="field-input" id="iEmail" type="email" placeholder="Seu melhor e-mail">
     <div class="field-error" id="eEmail">Informe um e-mail válido</div>
-    
     <button class="btn-green" id="btnSubmit" onclick="submitLead()">Ver meu resultado gratuito 🎁</button>
   </div>
 </div></div>
 
-<div class="footer">
-  © Viva Leve | @viva_leve_dry<br><br>
-  Aviso: Este material é informativo e educativo. Não substitui o parecer médico profissional. Os resultados podem variar de pessoa para pessoa de acordo com o metabolismo e dedicação individual.<br>
-  <a href="#" style="color:#888; text-decoration: none;">Privacidade</a> | <a href="#" style="color:#888; text-decoration: none;">Termos</a>
-</div>
+<div class="footer">© Viva Leve | Material Educativo</div>
 
 <script>
-// --- COPY AGRESSIVA E PSICOLÓGICA ---
 const Qs=[
-  {text:"Quando você vai se vestir para sair, qual é o seu sentimento mais frequente?",opts:[{t:"Tristeza por ter que usar a roupa que 'esconde', e não a que eu gosto",s:"detox"},{t:"Frustração profunda de ver que nenhuma calça fecha mais",s:"desafio"},{t:"Vergonha. Acabo desistindo de sair só para não me arrumar",s:"lowcarb"}]},
-  {text:"Seja sincera: sobre o seu corpo atual, o que mais machuca a sua autoestima hoje?",opts:[{t:"O volume constante na barriga que tira toda a minha feminilidade",s:"detox"},{t:"Fugir de fotos ou sempre tentar me esconder atrás das pessoas",s:"desafio"},{t:"A sensação de que eu me abandonei e perdi o controle de mim mesma",s:"lowcarb"}]},
-  {text:"Como você se sente nos momentos de intimidade ou quando vai à praia?",opts:[{t:"Insegura, tentando murchar a barriga ou me cobrir o tempo todo",s:"detox"},{t:"Apago a luz ou fujo, porque não suporto que olhem para o meu corpo",s:"desafio"},{t:"Sinto uma saudade enorme da mulher confiante que eu já fui",s:"lowcarb"}]},
-  {text:"Quando você deita a cabeça no travesseiro à noite, qual é o seu 'pesadelo silencioso'?",opts:[{t:"O arrependimento e a culpa por ter comido o que não devia de novo",s:"detox"},{t:"O medo paralisante de nunca mais conseguir voltar ao meu peso normal",s:"desafio"},{t:"O cansaço de acordar amanhã e ter que lutar contra a balança",s:"lowcarb"}]},
-  {text:"Sendo honesta, o que as tentativas falhas de emagrecer roubaram de você?",opts:[{t:"Minha esperança. Meu corpo parece inflamado e nada funciona",s:"detox"},{t:"Minha alegria. Passei fome, sofri e o peso voltou em dobro",s:"desafio"},{t:"Meu psicológico. Hoje sinto que sou escrava da ansiedade",s:"lowcarb"}]},
-  {text:"Se fosse possível apertar um botão hoje, qual seria o seu desejo mais urgente?",opts:[{t:"Acordar leve, olhar no espelho e ver minha barriga reta novamente",s:"detox"},{t:"Vestir minha calça favorita sem ter que prender a respiração",s:"desafio"},{t:"Voltar a ter orgulho de mim mesma e não ter mais vergonha",s:"lowcarb"}]},
-  {text:"Imagine encontrar alguém que não te vê há meses. Qual frase traria mais alívio?",opts:[{t:"'Nossa, você desinchou muito! Seu rosto está lindo!'",s:"detox"},{t:"'Meu Deus, você rejuvenesceu 10 anos! Está maravilhosa!'",s:"desafio"},{t:"'Como você está magra e confiante! Queria ter sua força.'",s:"lowcarb"}]}
+  {text:"Qual o seu sentimento ao se vestir?",opts:[{t:"Tristeza por ter que 'esconder' o corpo",s:"detox"},{t:"Frustração de ver que nada mais fecha",s:"desafio"},{t:"Vergonha. Acabo desistindo de sair",s:"lowcarb"}]},
+  {text:"O que mais machuca sua autoestima?",opts:[{t:"O volume constante na barriga",s:"detox"},{t:"Fugir de fotos e me esconder",s:"desafio"},{t:"A sensação de que me abandonei",s:"lowcarb"}]},
+  {text:"Como se sente na intimidade?",opts:[{t:"Insegura, tentando me cobrir",s:"detox"},{t:"Fujo, não suporto que olhem meu corpo",s:"desafio"},{t:"Saudade da mulher confiante que fui",s:"lowcarb"}]},
+  {text:"Qual seu pesadelo silencioso à noite?",opts:[{t:"A culpa por ter comido o que não devia",s:"detox"},{t:"O medo de nunca mais voltar ao peso",s:"desafio"},{t:"O cansaço de lutar contra a balança",s:"lowcarb"}]},
+  {text:"O que as falhas te roubaram?",opts:[{t:"Esperança. Nada funciona",s:"detox"},{t:"Alegria. Sofri e o peso voltou",s:"desafio"},{t:"Meu psicológico. Sou escrava da comida",s:"lowcarb"}]},
+  {text:"Seu desejo mais urgente hoje?",opts:[{t:"Acordar leve e ver a barriga reta",s:"detox"},{t:"Vestir meu jeans favorito sem sofrer",s:"desafio"},{t:"Ter orgulho de mim mesma",s:"lowcarb"}]},
+  {text:"Qual frase te traria alívio?",opts:[{t:"'Nossa, você desinchou muito!'",s:"detox"},{t:"'Você rejuvenesceu 10 anos!'",s:"desafio"},{t:"'Como você está magra e confiante!'",s:"lowcarb"}]}
 ];
 
 let cur=0, scores={detox:0,desafio:0,lowcarb:0};
@@ -133,30 +116,33 @@ function submitLead(){
   const email=document.getElementById('iEmail').value.trim();
   const er=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   
-  let valid = true;
-  if(!nome) { document.getElementById('eNome').classList.add('show'); valid=false; } else { document.getElementById('eNome').classList.remove('show'); }
-  if(!er.test(email)) { document.getElementById('eEmail').classList.add('show'); valid=false; } else { document.getElementById('eEmail').classList.remove('show'); }
-  if(!valid) return;
+  if(!nome || !er.test(email)) {
+    document.getElementById('eNome').classList.toggle('show', !nome);
+    document.getElementById('eEmail').classList.toggle('show', !er.test(email));
+    return;
+  }
 
   const btn = document.getElementById('btnSubmit');
   btn.disabled = true; 
-  btn.innerHTML = 'Analisando seu perfil... ⏳';
+  btn.innerHTML = 'Liberando seu perfil... ⏳';
 
   const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
   const destino = winner === 'detox' ? '1-detox-prestige-1.html' : winner === 'desafio' ? '2-desafio-21-dias-1.html' : '3-low-carb-prestige-1.html';
 
-  // --- O FIX DEFINITIVO (Usando text/plain para ignorar CORS) ---
-  fetch('https://script.google.com/macros/s/AKfycbxu_QRXF5U1nBNapxsfivxJMTbutawrtj1Gd8iiSET-hbNBKS_YhZyAQ0dchoT-tZ0I/exec', {
+  // --- O DISPARO QUE NÃO FALHA (CORS BYPASS) ---
+  const url = 'https://script.google.com/macros/s/AKfycbxu_QRXF5U1nBNapxsfivxJMTbutawrtj1Gd8iiSET-hbNBKS_YhZyAQ0dchoT-tZ0I/exec';
+  
+  fetch(url, {
     method: 'POST',
     mode: 'no-cors',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
+    headers: { 'Content-Type': 'text/plain' },
     body: JSON.stringify({ "nome": nome, "email": email, "perfil": winner })
   });
 
-  // Aguarda 400ms para o pacote sair e redireciona
+  // Aguarda 800ms para garantir que o pacote saiu e força a página de vendas
   setTimeout(() => {
     window.location.href = destino;
-  }, 400);
+  }, 800);
 }
 </script>
 </body>
