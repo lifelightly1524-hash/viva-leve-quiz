@@ -31,8 +31,8 @@
   .btn-green:disabled { background: #ccc; cursor: not-allowed; opacity: 0.7; }
 
   .q-area { display:none; padding:25px 24px; }
-  .q-text { font-family:var(--font-title); font-size:1.3rem; font-weight:700; color:var(--escuro); margin-bottom:20px; }
-  .opt { display:flex; align-items:center; gap:12px; padding:15px; border:2px solid #e6e6e6; border-radius:12px; margin-bottom:10px; cursor:pointer; background:#fff; width:100%; text-align:left; font-size: 0.95rem; }
+  .q-text { font-family:var(--font-title); font-size:1.3rem; font-weight:700; color:var(--escuro); margin-bottom:20px; line-height: 1.4; }
+  .opt { display:flex; align-items:center; gap:12px; padding:15px; border:2px solid #e6e6e6; border-radius:12px; margin-bottom:10px; cursor:pointer; background:#fff; width:100%; text-align:left; font-size: 0.95rem; line-height: 1.4; }
   .opt.sel { border-color:var(--verde); background:#f0f8f3; font-weight:bold; }
 
   .lead-area { display:none; padding:32px 24px; }
@@ -65,7 +65,7 @@
   </div>
 
   <div class="lead-area" id="leadArea">
-    <h2 style="margin-bottom: 15px; font-family: var(--font-title);">Diagnóstico Pronto!</h2>
+    <h2 style="margin-bottom: 15px; font-family: var(--font-title);">Análise Concluída!</h2>
     <p style="margin-bottom: 20px; color: #666;">Para onde enviamos seu perfil e a receita bônus?</p>
     
     <input class="field-input" id="iNome" type="text" placeholder="Seu nome">
@@ -78,17 +78,18 @@
   </div>
 </div></div>
 
-<div class="footer">© Viva Leve | @viva_leve_dry</div>
+<div class="footer">© Viva Leve | @viva_leve_dry<br><br><span style="font-size: 0.65rem; color: #aaa;">Aviso: Os resultados podem variar. Este material é informativo e não substitui o parecer médico.</span></div>
 
 <script>
+// --- COPY EMOCIONAL AGRESSIVA (Foco na Dor e Desejo Profundo) ---
 const Qs=[
-  {text:"Quando se olha no espelho hoje, o que mais te incomoda?",opts:[{t:"Barriga inchada e retenção",s:"detox"},{t:"Efeito sanfona (engorda/emagrece)",s:"desafio"},{t:"Dúvida sobre o que comer",s:"lowcarb"}]},
-  {text:"Qual sua relação com doces e massas?",opts:[{t:"Consigo controlar bem",s:"detox"},{t:"Ataco por ansiedade à noite",s:"desafio"},{t:"Sinto que sou viciada neles",s:"lowcarb"}]},
-  {text:"Como está sua energia no dia a dia?",opts:[{t:"Acordo já cansada",s:"detox"},{t:"Tenho picos de energia e quedas",s:"desafio"},{t:"Normal, mas o peso não desce",s:"lowcarb"}]},
-  {text:"Já tentou dietas antes?",opts:[{t:"Várias, mas desisti por fome",s:"desafio"},{t:"Sim, mas me sinto sempre inchada",s:"detox"},{t:"Nunca fiz nada sério antes",s:"lowcarb"}]},
-  {text:"O que seria um emagrecimento ideal para você?",opts:[{t:"Algo natural que limpe meu corpo",s:"detox"},{t:"Um passo a passo de 21 dias",s:"desafio"},{t:"Aprender a comer sem passar fome",s:"lowcarb"}]},
-  {text:"Em quanto tempo quer ver os primeiros resultados?",opts:[{t:"Em menos de 7 dias",s:"detox"},{t:"Em 3 semanas (21 dias)",s:"desafio"},{t:"No meu tempo, sem pressa",s:"lowcarb"}]},
-  {text:"Qual seu maior objetivo hoje?",opts:[{t:"Desinchar e ganhar saúde",s:"detox"},{t:"Perder 5kg a 10kg rápido",s:"desafio"},{t:"Mudar de vida definitivamente",s:"lowcarb"}]}
+  {text:"Quando você vai se vestir para sair, qual é o seu sentimento mais frequente?",opts:[{t:"Tristeza por ter que usar a roupa que 'esconde', e não a que eu gosto",s:"detox"},{t:"Frustração profunda de ver que nenhuma calça fecha mais",s:"desafio"},{t:"Vergonha. Acabo desistindo de sair só para não me arrumar",s:"lowcarb"}]},
+  {text:"Seja sincera: sobre o seu corpo atual, o que mais machuca a sua autoestima hoje?",opts:[{t:"O volume constante na barriga que tira toda a minha feminilidade",s:"detox"},{t:"Fugir de fotos ou sempre tentar me esconder atrás das pessoas nelas",s:"desafio"},{t:"A sensação de que eu me abandonei e perdi o controle de mim mesma",s:"lowcarb"}]},
+  {text:"Como você se sente nos momentos de intimidade ou quando vai à praia?",opts:[{t:"Insegura, tentando murchar a barriga ou me cobrir o tempo todo",s:"detox"},{t:"Apago a luz ou fujo, porque não suporto que olhem para o meu corpo",s:"desafio"},{t:"Sinto uma saudade enorme da mulher confiante que eu já fui um dia",s:"lowcarb"}]},
+  {text:"Quando você deita a cabeça no travesseiro à noite, qual é o seu 'pesadelo silencioso'?",opts:[{t:"O arrependimento e a culpa por ter comido o que não devia de novo",s:"detox"},{t:"O medo paralisante de nunca mais conseguir voltar ao meu peso normal",s:"desafio"},{t:"O cansaço de acordar amanhã e ter que lutar contra a balança outra vez",s:"lowcarb"}]},
+  {text:"Sendo honesta, o que as tentativas falhas de emagrecer roubaram de você?",opts:[{t:"Minha esperança. Meu corpo parece inflamado e nada funciona",s:"detox"},{t:"Minha alegria. Passei fome, sofri e o peso voltou em dobro",s:"desafio"},{t:"Meu psicológico. Hoje sinto que sou escrava da comida e da ansiedade",s:"lowcarb"}]},
+  {text:"Se fosse possível apertar um botão hoje, qual seria o seu desejo mais urgente?",opts:[{t:"Acordar leve, olhar no espelho e ver minha barriga reta novamente",s:"detox"},{t:"Vestir minha calça jeans favorita sem ter que prender a respiração",s:"desafio"},{t:"Voltar a ter orgulho de mim mesma e não ter mais vergonha do meu corpo",s:"lowcarb"}]},
+  {text:"Imagine encontrar alguém que não te vê há meses. Qual frase faria você chorar de alívio?",opts:[{t:"'Nossa, você desinchou muito! Seu rosto está lindo, o que você fez?'",s:"detox"},{t:"'Meu Deus, você rejuvenesceu 10 anos! Está maravilhosa!'",s:"desafio"},{t:"'Como você está magra e confiante! Queria ter essa sua força.'",s:"lowcarb"}]}
 ];
 
 let cur=0, scores={detox:0,desafio:0,lowcarb:0}, selScore=null;
@@ -128,30 +129,30 @@ function submitLead(){
   const email=document.getElementById('iEmail').value.trim();
   const er=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   
-  // Validação básica
   let valid = true;
   if(!nome) { document.getElementById('eNome').classList.add('show'); valid=false; } else { document.getElementById('eNome').classList.remove('show'); }
   if(!er.test(email)) { document.getElementById('eEmail').classList.add('show'); valid=false; } else { document.getElementById('eEmail').classList.remove('show'); }
   if(!valid) return;
 
-  // --- 🚀 TRAVA DO BOTÃO ---
   const btn = document.getElementById('btnSubmit');
-  btn.disabled = true; 
-  btn.innerHTML = 'Gerando seu diagnóstico... ⏳';
+  if (btn) {
+    btn.disabled = true; 
+    btn.innerHTML = 'Analisando seu perfil... ⏳';
+  }
 
   const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
 
-  // --- 🔗 CONEXÃO COM VERSÃO 18 (URL ATUALIZADA) ---
-  fetch('https://script.google.com/macros/s/AKfycbwx8X8LmAhSQ17EQRzlF_7KpeE0viFLPaG7BxeUioc3XW-e1wXy0zJYmmFqjqY0EdUx/exec', {
+  fetch('https://script.google.com/macros/s/AKfycbxu_QRXF5U1nBNapxsfivxJMTbutawrtj1Gd8iiSET-hbNBKS_YhZyAQ0dchoT-tZ0I/exec', {
     method: 'POST',
     mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' }, 
     body: JSON.stringify({ "nome": nome, "email": email, "perfil": winner })
   }).then(() => {
     setTimeout(() => { 
       window.location.href = winner === 'detox' ? '1-detox-prestige-1.html' : winner === 'desafio' ? '2-desafio-21-dias-1.html' : '3-low-carb-prestige-1.html';
     }, 1500);
   }).catch(() => {
-    window.location.href = 'index.html'; // Fallback em caso de erro
+    window.location.href = 'index.html';
   });
 }
 </script>
