@@ -127,20 +127,19 @@ async function submitLead(){
   const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
   const destino = winner === 'detox' ? '1-detox-prestige-1.html' : winner === 'desafio' ? '2-desafio-21-dias-1.html' : '3-low-carb-prestige-1.html';
 
-  const url = 'https://script.google.com/macros/s/AKfycbxu_QRXF5U1nBNapxsfivxJMTbutawrtj1Gd8iiSET-hbNBKS_YhZyAQ0dchoT-tZ0l/exec';
+  const url = 'https://script.google.com/macros/s/AKfycbxu_QRXF5U1nBNapxsfivxJMTbutawrtj1Gd8iiSET-hbNBKS_YhZyAQ0dchoT-tZ0l/exec;
 
   try {
     await fetch(url, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nome: nome, email: email, perfil: winner })
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ nome, email, perfil: winner })
     });
   } catch(err) {
     console.warn('Envio:', err);
   }
 
-  // Redireciona logo após o envio
   window.location.href = destino;
 }
 </script>
