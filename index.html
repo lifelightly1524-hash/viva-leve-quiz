@@ -3,70 +3,144 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Quiz Viva Leve</title>
+<title>Quiz Viva Leve — Protocolo de Emagrecimento</title>
 <style>
-  :root { --verde: #2d5a3d; --creme: #fdf9f2; }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family: sans-serif; background:var(--creme); text-align:center; }
-  .hero { background:#111f17; padding:40px 20px; color:#fff; }
-  .main { max-width:500px; margin:-20px auto 0; padding:20px; }
-  .card { background:#fff; border-radius:20px; padding:30px; box-shadow:0 10px 30px rgba(0,0,0,0.1); }
-  .btn { width:100%; padding:15px; background:var(--verde); color:#fff; border:none; border-radius:10px; font-weight:700; cursor:pointer; margin-top:20px; }
-  .opt { width:100%; padding:15px; border:1px solid #ddd; border-radius:10px; margin-bottom:10px; background:#fff; cursor:pointer; text-align:left; }
-  .field-input { width:100%; padding:15px; border:1px solid #ddd; border-radius:10px; margin-bottom:10px; }
+  :root { --verde: #2d5a3d; --verde2: #4a8c62; --dourado: #c9943a; --creme: #fdf9f2; --escuro: #1a1a1a; --erro: #dc2626; }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background:var(--creme); min-height:100vh; overflow-x:hidden; }
+
+  .hero { background:linear-gradient(155deg,#111f17 0%,#1e3828 55%,#111f17 100%); padding:40px 20px; text-align:center; }
+  .hero h1 { font-family: Georgia, 'Times New Roman', serif; font-size:1.9rem; color:#fff; line-height:1.2; margin-bottom:14px; }
+  .hero h1 em { color:#e8b84b; font-style:italic; }
+
+  .main { max-width:580px; margin:-20px auto 0; padding:0 14px 56px; position:relative; z-index:10; }
+  .card { background:#fff; border-radius:22px; box-shadow:0 20px 60px rgba(0,0,0,.1); overflow:hidden; }
+
+  .prog-wrap { display:none; }
+  .prog-bar { height:5px; background:#eee; }
+  .prog-fill { height:100%; background:linear-gradient(90deg,var(--verde),var(--dourado)); width:0%; transition:width .5s; }
+
+  .intro { padding:30px 24px; text-align: center; }
+  .btn-green { width:100%; padding:18px; background:linear-gradient(135deg,var(--verde),var(--verde2)); color:#fff; border:none; border-radius:13px; font-size:1.02rem; font-weight:700; cursor:pointer; }
+  .btn-green:disabled { background: #ccc; cursor: not-allowed; opacity: 0.7; }
+
+  .q-area { display:none; padding:25px 24px; }
+  .q-text { font-family: Georgia, 'Times New Roman', serif; font-size:1.3rem; font-weight:700; color:var(--escuro); margin-bottom:20px; line-height: 1.4; }
+  .opt { display:flex; align-items:center; gap:12px; padding:15px; border:1px solid #ddd; border-radius:12px; margin-bottom:10px; cursor:pointer; background:#fff; width:100%; text-align:left; font-size: 0.95rem; }
+
+  .lead-area { display:none; padding:32px 24px; }
+  .field-input { width:100%; padding:14px; border:2px solid #ddd; border-radius:11px; margin-bottom:15px; outline:none; font-size: 1rem; }
+  .footer { text-align:center; padding:40px 20px; font-size:0.75rem; color:#888; }
 </style>
 </head>
 <body>
-<div class="hero"><h1>O que <em>bloqueia</em> seu emagrecimento?</h1></div>
+
+<div class="hero">
+  <h1>O que está <em>bloqueando</em> seu emagrecimento?</h1>
+</div>
+
 <div class="main"><div class="card">
-  <div id="intro">
-    <p style="margin-bottom:20px;">Descubra seu perfil metabólico agora.</p>
-    <button class="btn" onclick="start()">Começar Análise 🍋</button>
+  <div class="prog-wrap" id="progWrap"><div class="prog-bar"><div class="prog-fill" id="progFill"></div></div></div>
+
+  <div class="intro" id="introArea">
+    <div style="font-size: 1.1rem; margin-bottom: 25px; color: #555; line-height: 1.6;">
+      Responda 7 perguntas rápidas para descobrir seu perfil metabólico e receber o protocolo ideal.
+    </div>
+    <button class="btn-green" onclick="startQuiz()">Descobrir meu perfil agora 🍋</button>
   </div>
-  <div id="questions" style="display:none;">
-    <h3 id="qText" style="margin-bottom:20px;"></h3>
-    <div id="opts"></div>
+
+  <div class="q-area" id="qArea">
+    <div id="qText" class="q-text"></div>
+    <div id="optArea"></div>
   </div>
-  <div id="lead" style="display:none;">
-    <h3>Análise Concluída!</h3>
-    <p style="margin-bottom:20px;">Para onde enviamos seu acesso?</p>
+
+  <div class="lead-area" id="leadArea">
+    <h2 style="margin-bottom: 15px; font-family: Georgia, serif;">Análise Concluída!</h2>
+    <p style="margin-bottom: 20px; color: #666;">Para onde enviamos seu perfil personalizado e o guia de acesso?</p>
+    
     <input class="field-input" id="iNome" type="text" placeholder="Seu nome">
-    <input class="field-input" id="iEmail" type="email" placeholder="Seu e-mail">
-    <button class="btn" id="btnSubmit" onclick="submit()">Ver Meu Resultado ➜</button>
+    <input class="field-input" id="iEmail" type="email" placeholder="Seu melhor e-mail">
+    
+    <button class="btn-green" id="btnSubmit" onclick="submitLead()">Ver meu resultado gratuito 🎁</button>
   </div>
 </div></div>
+
+<div class="footer">
+  © Viva Leve | @viva_leve_dry<br><br>
+  Aviso: Este material é informativo e educativo. Não substitui o parecer médico profissional.
+</div>
+
 <script>
+// --- COPY EMOCIONAL AGRESSIVA (PADRÃO MONSTRO) ---
 const Qs=[
-  {t:"Seu objetivo?",o:[{t:"Desinchar",s:"detox"},{t:"Mudar hábitos",s:"desafio"},{t:"Queima rápida",s:"lowcarb"}]},
-  {t:"Como se sente?",o:[{t:"Inchada",s:"detox"},{t:"Cansada de dietas",s:"desafio"},{t:"Sempre com fome",s:"lowcarb"}]}
+  {text:"Quando você vai se vestir para sair, qual é o seu sentimento mais frequente?",opts:[{t:"Tristeza por ter que usar a roupa que 'esconde', e não a que eu gosto",s:"detox"},{t:"Frustração profunda de ver que nenhuma calça fecha mais",s:"desafio"},{t:"Vergonha. Acabo desistindo de sair só para não me arrumar",s:"lowcarb"}]},
+  {text:"Seja sincera: sobre o seu corpo atual, o que mais machuca a sua autoestima hoje?",opts:[{t:"O volume constante na barriga que tira toda a minha feminilidade",s:"detox"},{t:"Fugir de fotos ou sempre tentar me esconder atrás das pessoas nelas",s:"desafio"},{t:"A sensação de que eu me abandonei e perdi o controle de mim mesma",s:"lowcarb"}]},
+  {text:"Como você se sente nos momentos de intimidade ou quando vai à praia?",opts:[{t:"Insegura, tentando murchar a barriga ou me cobrir o tempo todo",s:"detox"},{t:"Apago a luz ou fujo, porque não suporto que olhem para o meu corpo",s:"desafio"},{t:"Sinto uma saudade enorme da mulher confiante que eu já fui um dia",s:"lowcarb"}]},
+  {text:"Quando você deita a cabeça no travesseiro à noite, qual é o seu 'pesadelo silencioso'?",opts:[{t:"O arrependimento e a culpa por ter comido o que não devia de novo",s:"detox"},{t:"O medo paralisante de nunca mais conseguir voltar ao meu peso normal",s:"desafio"},{t:"O cansaço de acordar amanhã e ter que lutar contra a balança outra vez",s:"lowcarb"}]},
+  {text:"Sendo honesta, o que as tentativas falhas de emagrecer roubaram de você?",opts:[{t:"Minha esperança. Meu corpo parece inflamado e nada funciona",s:"detox"},{t:"Minha alegria. Passei fome, sofri e o peso voltou em dobro",s:"desafio"},{t:"Meu psicológico. Hoje sinto que sou escrava da comida e da ansiedade",s:"lowcarb"}]},
+  {text:"Se fosse possível apertar um botão hoje, qual seria o seu desejo mais urgente?",opts:[{t:"Acordar leve, olhar no espelho e ver minha barriga reta novamente",s:"detox"},{t:"Vestir minha calça jeans favorita sem ter que prender a respiração",s:"desafio"},{t:"Voltar a ter orgulho de mim mesma e não ter mais vergonha do meu corpo",s:"lowcarb"}]},
+  {text:"Imagine encontrar alguém que não te vê há meses. Qual frase faria você chorar de alívio?",opts:[{t:"'Nossa, você desinchou muito! Seu rosto está lindo, o que você fez?'",s:"detox"},{t:"'Meu Deus, você rejuvenesceu 10 anos! Está maravilhosa!'",s:"desafio"},{t:"'Como você está magra e confiante! Queria ter essa sua força.'",s:"lowcarb"}]}
 ];
+
 let cur=0, scores={detox:0,desafio:0,lowcarb:0};
-function start(){ document.getElementById('intro').style.display='none'; document.getElementById('questions').style.display='block'; render(); }
-function render(){
-  const q=Qs[cur]; document.getElementById('qText').innerText=q.t;
-  const area=document.getElementById('opts'); area.innerHTML='';
-  q.o.forEach(o=>{
-    const b=document.createElement('button'); b.className='opt'; b.innerText=o.t;
-    b.onclick=()=>{ scores[o.s]++; if(cur<Qs.length-1){ cur++; render(); } else { document.getElementById('questions').style.display='none'; document.getElementById('lead').style.display='block'; } };
-    area.appendChild(b);
-  });
+
+function startQuiz(){
+  document.getElementById('introArea').style.display='none';
+  document.getElementById('progWrap').style.display='block';
+  document.getElementById('qArea').style.display='block';
+  renderQ();
 }
-function submit(){
-  const n=document.getElementById('iNome').value, e=document.getElementById('iEmail').value;
-  if(!n || !e.includes('@')) return alert('Preencha corretamente');
-  document.getElementById('btnSubmit').disabled=true;
-  const w=Object.keys(scores).reduce((a,b)=>scores[a]>scores[b]?a:b);
-  const d = w === 'detox' ? '1-detox-prestige-1.html' : w === 'desafio' ? '2-desafio-21-dias-1.html' : '3-low-carb-prestige-1.html';
+
+function renderQ(){
+  const q=Qs[cur];
+  document.getElementById('qText').textContent=q.text;
+  const oa=document.getElementById('optArea');
+  oa.innerHTML='';
+  q.opts.forEach(o=>{
+    const b=document.createElement('button'); b.className='opt';
+    b.innerHTML=o.t; b.onclick=()=> {
+      scores[o.s]++;
+      if(cur<Qs.length-1){ cur++; renderQ(); }
+      else { showLead(); }
+    };
+    oa.appendChild(b);
+  });
+  document.getElementById('progFill').style.width=((cur/Qs.length)*100)+'%';
+}
+
+function showLead(){
+  document.getElementById('qArea').style.display='none';
+  document.getElementById('progWrap').style.display='none';
+  document.getElementById('leadArea').style.display='block';
+}
+
+function submitLead(){
+  const nome=document.getElementById('iNome').value.trim();
+  const email=document.getElementById('iEmail').value.trim();
   
-  // URL DO SEU GOOGLE SCRIPT
-  fetch('https://script.google.com/macros/s/AKfycbxu_QRXF5U1nBNapxsfivxJMTbutawrtj1Gd8iiSET-hbNBKS_YhZyAQ0dchoT-tZ0I/exec', {
+  if(!nome || !email.includes('@')) return alert('Por favor, preencha nome e e-mail corretamente.');
+
+  const btn = document.getElementById('btnSubmit');
+  btn.disabled = true; 
+  btn.innerHTML = 'Analisando seu perfil... ⏳';
+
+  const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+  const destino = winner === 'detox' ? '1-detox-prestige-1.html' : winner === 'desafio' ? '2-desafio-21-dias-1.html' : '3-low-carb-prestige-1.html';
+
+  // --- O COMANDO REFORÇADO DE ENVIO (MANOBRA CORS BYPASS) ---
+  const url = 'https://script.google.com/macros/s/AKfycbxu_QRXF5U1nBNapxsfivxJMTbutawrtj1Gd8iiSET-hbNBKS_YhZyAQ0dchoT-tZ0I/exec';
+
+  fetch(url, {
     method: 'POST',
     mode: 'no-cors',
     headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify({ nome: n, email: e, perfil: w })
+    body: JSON.stringify({ "nome": nome, "email": email, "perfil": winner })
   });
 
-  setTimeout(() => { window.location.href = d; }, 800);
+  // Aguarda 800ms para garantir o envio antes de redirecionar
+  setTimeout(() => {
+    window.location.href = destino;
+  }, 800);
 }
 </script>
 </body>
