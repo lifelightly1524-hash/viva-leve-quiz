@@ -20,7 +20,7 @@
 <div class="hero"><h1>O que <em>bloqueia</em> seu emagrecimento?</h1></div>
 <div class="main"><div class="card">
   <div id="intro">
-    <p style="margin-bottom:20px;">Descubra seu perfil e receba o guia ideal para o seu corpo.</p>
+    <p style="margin-bottom:20px;">Descubra seu perfil metabólico agora.</p>
     <button class="btn" onclick="start()">Começar Análise 🍋</button>
   </div>
   <div id="questions" style="display:none;">
@@ -37,9 +37,8 @@
 </div></div>
 <script>
 const Qs=[
-  {t:"Sentimento ao se vestir?",o:[{t:"Tristeza/Esconder",s:"detox"},{t:"Frustração/Nada fecha",s:"desafio"},{t:"Vergonha/Desisto",s:"lowcarb"}]},
-  {t:"O que mais machuca?",o:[{t:"Volume na barriga",s:"detox"},{t:"Fugir de fotos",s:"desafio"},{t:"Me abandonei",s:"lowcarb"}]},
-  {t:"Desejo urgente?",o:[{t:"Barriga reta",s:"detox"},{t:"Jeans favorito",s:"desafio"},{t:"Ter orgulho",s:"lowcarb"}]}
+  {t:"Seu objetivo?",o:[{t:"Desinchar",s:"detox"},{t:"Mudar hábitos",s:"desafio"},{t:"Queima rápida",s:"lowcarb"}]},
+  {t:"Como se sente?",o:[{t:"Inchada",s:"detox"},{t:"Cansada de dietas",s:"desafio"},{t:"Sempre com fome",s:"lowcarb"}]}
 ];
 let cur=0, scores={detox:0,desafio:0,lowcarb:0};
 function start(){ document.getElementById('intro').style.display='none'; document.getElementById('questions').style.display='block'; render(); }
@@ -59,6 +58,7 @@ function submit(){
   const w=Object.keys(scores).reduce((a,b)=>scores[a]>scores[b]?a:b);
   const d = w === 'detox' ? '1-detox-prestige-1.html' : w === 'desafio' ? '2-desafio-21-dias-1.html' : '3-low-carb-prestige-1.html';
   
+  // URL DO SEU GOOGLE SCRIPT
   fetch('https://script.google.com/macros/s/AKfycbxu_QRXF5U1nBNapxsfivxJMTbutawrtj1Gd8iiSET-hbNBKS_YhZyAQ0dchoT-tZ0I/exec', {
     method: 'POST',
     mode: 'no-cors',
